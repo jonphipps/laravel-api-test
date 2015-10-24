@@ -156,6 +156,17 @@ class ViewGenerator implements GeneratorProvider
             $headerFields .= '<th>'.Str::title(str_replace('_', ' ', $field['fieldName']))."</th>\n\t\t\t";
         }
 
+        $columnsDataTable = '[';
+        $firstRow = true;
+        foreach ($this->commandData->inputFields as $field) {
+            if (!$firstRow) $columnsDataTable .= ',';
+            $columnsDataTable .= "{ data: '".$field['fieldName'] . "', name: '" .$field['fieldName'] . "'}" ;
+            $firstRow = false;
+        }
+        $columnsDataTable .= ']';
+        $templateData = str_replace('$COLUMNS_DATATABLE$', $columnsDataTable, $templateData);
+
+
         $headerFields = trim($headerFields);
 
         $templateData = str_replace('$FIELD_HEADERS$', $headerFields, $templateData);
