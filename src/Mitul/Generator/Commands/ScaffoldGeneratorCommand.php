@@ -10,6 +10,9 @@ use Mitul\Generator\Generators\Common\RequestGenerator;
 use Mitul\Generator\Generators\Common\RoutesGenerator;
 use Mitul\Generator\Generators\Scaffold\ViewControllerGenerator;
 use Mitul\Generator\Generators\Scaffold\ViewGenerator;
+use Mitul\Generator\Generators\Common\InterfaceGenerator;
+use Mitul\Generator\Generators\Common\ServiceGenerator;
+use Mitul\Generator\Generators\Common\ValidatorGenerator;
 
 class ScaffoldGeneratorCommand extends BaseCommand
 {
@@ -57,8 +60,17 @@ class ScaffoldGeneratorCommand extends BaseCommand
         $requestGenerator = new RequestGenerator($this->commandData);
         $requestGenerator->generate();
 
+        $interfaceGenerator = new InterfaceGenerator($this->commandData);
+        $interfaceGenerator->generate();
+
         $repositoryGenerator = new RepositoryGenerator($this->commandData);
         $repositoryGenerator->generate();
+
+        $serviceGenerator = new ServiceGenerator($this->commandData);
+        $serviceGenerator->generate();
+
+        $validatorGenerator = new ValidatorGenerator($this->commandData);
+        $validatorGenerator->generate();
 
         $repoControllerGenerator = new ViewControllerGenerator($this->commandData);
         $repoControllerGenerator->generate();

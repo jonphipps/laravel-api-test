@@ -28,6 +28,10 @@ return [
 
     'path_repository'          => app_path('Libraries/Repositories/'),
 
+    'path_service'          => app_path('Services/'),
+
+    'path_validator'          => app_path('Validators/'),
+
     'path_controller'          => app_path('Http/Controllers/'),
 
     'path_api_controller'      => app_path('Http/Controllers/API/'),
