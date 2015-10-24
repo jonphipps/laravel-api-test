@@ -134,6 +134,18 @@ class ViewGenerator implements GeneratorProvider
             $templateData = str_replace('$PAGINATE$', '', $templateData);
         }
 
+        $columnsDataTable = '[';
+        $firstRow = true;
+        foreach ($this->commandData->inputFields as $field) {
+            if (!$firstRow) $columnsDataTable .= ',';
+            $columnsDataTable .= "{ data: '".$field['fieldName'] . "', name: '" .$field['fieldName'] . "'}" ;
+            $firstRow = false;
+        }
+        $columnsDataTable .= ",{data: 'actions', name: 'actions',  orderable: false, searchable: false}";
+        $columnsDataTable .= ']';
+        $templateData = str_replace('$COLUMNS_DATATABLE$', $columnsDataTable, $templateData);
+
+
         $fileName = 'index.blade.php';
 
         $path = $this->path.$fileName;
