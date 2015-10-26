@@ -74,14 +74,14 @@ class TableFieldsGenerator
             switch ($column->getType()->getName()) {
                 case 'integer':
                     $fieldInput = $this->generateIntFieldInput($column->getName(), 'integer', $column);
-                    if ( strpos($column->getName(), '_id' ))
+                    if ( strpos($column->getName(), '_id' )>0)
                         $type = 'select';
                     else
                         $type = 'number';
                     break;
 
                 case 'tinyint':
-                    $fieldInput = $this->generateIntFieldInput($column->getName(), 'tinyint', $column);
+                    $fieldInput = $this->generateIntFieldInput($column->getName(), 'tinyInteger', $column);
                     $type = 'checkbox';
                     break;
 
@@ -89,13 +89,14 @@ class TableFieldsGenerator
                     $fieldInput = $this->generateIntFieldInput($column->getName(), 'smallInteger', $column);
                     $type = 'number';
                     break;
+
                 case 'bigint':
                     $fieldInput = $this->generateIntFieldInput($column->getName(), 'bigInteger', $column);
                     $type = 'number';
                     break;
                 case 'boolean':
                     $fieldInput = $this->generateSingleFieldInput($column->getName(), 'boolean');
-                    $type = 'text';
+                    $type = 'checkbox';
                     break;
                 case 'datetime':
                     $fieldInput = $this->generateSingleFieldInput($column->getName(), 'dateTime');
