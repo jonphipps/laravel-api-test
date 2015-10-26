@@ -73,7 +73,7 @@ class ModelGenerator implements GeneratorProvider
 
     private function generateRelations()
     {
-        if ($this->commandData->tableName == '') exit;
+        if ($this->commandData->tableName == '') return '';
         $code = '';
 
         //Get what tables it belongs to

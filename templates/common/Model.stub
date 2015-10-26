@@ -25,5 +25,6 @@ class $MODEL_NAME$ extends Model
 	    $RULES$
 	];
 
-	$RELATIONS$
+$RELATIONS$
+
 }
