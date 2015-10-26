@@ -80,7 +80,7 @@ class ModelGenerator implements GeneratorProvider
         foreach($relations as $r)
         {
             $code .= "public function " . StringUtils::singularize($r->referenced_table_name) ."() {\n";
-            $code .= "\t" . '$this->belongsTo(' .  "'" . ucfirst(StringUtils::singularize($r->referenced_table_name)) .", '". $r->column_name . "') \n";
+            $code .= "\t" . '$this->belongsTo(' .  "'" . ucfirst(StringUtils::singularize($r->referenced_table_name)) .", '". $r->column_name . "'); \n";
             $code .= "}\n\n";
         }
 
