@@ -24,7 +24,7 @@ return [
 
     'path_migration'           => base_path('database/migrations/'),
 
-    'path_model'               => app_path('Models/'),
+    'path_model'               => app_path('Entities/'),
 
     'path_repository'          => app_path('Libraries/Repositories/'),
 
@@ -53,7 +53,7 @@ return [
     |
     */
 
-    'namespace_model'          => 'App\Models',
+    'namespace_model'          => 'App\Entities',
 
     'namespace_repository'     => 'App\Libraries\Repositories',
 
