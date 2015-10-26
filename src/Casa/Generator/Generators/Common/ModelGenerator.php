@@ -89,8 +89,8 @@ class ModelGenerator implements GeneratorProvider
         $relations = DataBaseHelper::getReferencesFromTable($this->commandData->tableName);
         foreach($relations as $r)
         {
-            $code .= "\tpublic function " . StringUtils::singularize($r->REFERENCED_TABLE_NAME) ."() {\n";
-            $code .= "\t\t" . '$this->hasMany(' .  "'" . ucfirst(StringUtils::singularize($r->REFERENCED_TABLE_NAME)) ."', '". $r->COLUMN_NAME . "'); \n";
+            $code .= "\tpublic function " . StringUtils::singularize($r->TABLE_NAME) ."() {\n";
+            $code .= "\t\t" . '$this->hasMany(' .  "'" . ucfirst(StringUtils::singularize($r->TABLE_NAME)) ."', '". $r->COLUMN_NAME . "'); \n";
             $code .= "\t}\n\n";
         }
 
