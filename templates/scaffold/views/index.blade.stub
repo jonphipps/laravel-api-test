@@ -92,15 +92,8 @@
 	"processing": true,
 	"serverSide": true,
 	"ajax": "$MODEL_NAME_PLURAL_CAMEL$/data",
-	"columns": [
-			{data: 'id', name: 'id'},
-			{data: 'conta', name: 'conta'},
-			{data: 'saldo_inicial', name:'saldo_inicial'},
-			{data: 'inativa', name: 'inativa'},
-			{data: 'actions', name: 'actions',  orderable: false, searchable: false}
-		]
+	"columns": $COLUMNS_DATATABLE$
 
 	});
-
 
 @endsection
