@@ -74,8 +74,17 @@ class TableFieldsGenerator
             switch ($column->getType()->getName()) {
                 case 'integer':
                     $fieldInput = $this->generateIntFieldInput($column->getName(), 'integer', $column);
-                    $type = 'number';
+                    if ( strpos($column->getName(), '_id' ))
+                        $type = 'select';
+                    else
+                        $type = 'number';
                     break;
+
+                case 'tinyint':
+                    $fieldInput = $this->generateIntFieldInput($column->getName(), 'tinyint', $column);
+                    $type = 'checkbox';
+                    break;
+
                 case 'smallint':
                     $fieldInput = $this->generateIntFieldInput($column->getName(), 'smallInteger', $column);
                     $type = 'number';

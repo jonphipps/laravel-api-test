@@ -154,7 +154,7 @@ class FormFieldsGenerator
     {
         $textField = self::generateLabel($field);
 
-        $textField .= "\n\t{!! Form::date('\$FIELD_NAME\$', null, ['class' => 'form-control']) !!}";
+        $textField .= "\n\t{!! Form::date('\$FIELD_NAME\$', null, ['class' => 'form-control form-control-inline input-medium date-picker']) !!}";
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
         $templateData = self::replaceFieldVars($templateData, $field);
