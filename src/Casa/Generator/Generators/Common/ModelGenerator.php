@@ -8,6 +8,7 @@ use Config;
 use Casa\Generator\CommandData;
 use Casa\Generator\Generators\GeneratorProvider;
 use Casa\Generator\Utils\GeneratorUtils;
+use Illuminate\Support\Str;
 
 class ModelGenerator implements GeneratorProvider
 {
@@ -81,7 +82,7 @@ class ModelGenerator implements GeneratorProvider
         foreach($relations as $r)
         {
             $code .= "\tpublic function " . StringUtils::singularize($r->REFERENCED_TABLE_NAME) ."() {\n";
-            $code .= "\t\t" . '$this->belongsTo(' .  "'" . ucfirst(StringUtils::singularize($r->REFERENCED_TABLE_NAME)) ."', '". $r->COLUMN_NAME . "'); \n";
+            $code .= "\t\t" . '$this->belongsTo(' .  "'" . ucfirst(Str::camel(StringUtils::singularize($r->REFERENCED_TABLE_NAME))) ."', '". $r->COLUMN_NAME . "'); \n";
             $code .= "\t}\n\n";
         }
 
@@ -89,8 +90,8 @@ class ModelGenerator implements GeneratorProvider
         $relations = DataBaseHelper::getReferencesFromTable($this->commandData->tableName);
         foreach($relations as $r)
         {
-            $code .= "\tpublic function " . StringUtils::singularize($r->TABLE_NAME) ."() {\n";
-            $code .= "\t\t" . '$this->hasMany(' .  "'" . ucfirst(StringUtils::singularize($r->TABLE_NAME)) ."', '". $r->COLUMN_NAME . "'); \n";
+            $code .= "\tpublic function " . Str::plural($r->TABLE_NAME) ."() {\n";
+            $code .= "\t\t" . '$this->hasMany(' .  "'" . ucfirst(Str::camel(StringUtils::singularize($r->TABLE_NAME))) ."', '". $r->COLUMN_NAME . "'); \n";
             $code .= "\t}\n\n";
         }
 
