@@ -27,7 +27,7 @@ class InterfaceGenerator implements GeneratorProvider
 
         $templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
 
-        $fileName = 'I'. $this->commandData->modelName.'.php';
+        $fileName = 'I'. $this->commandData->modelName.'Repository.php';
 
         if (!file_exists($this->path)) {
             mkdir($this->path, 0755, true);

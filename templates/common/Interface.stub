@@ -4,7 +4,7 @@ use $NAMESPACE_MODEL$\$MODEL_NAME$;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 
-interface I$MODEL_NAME$ extends RepositoryInterface
+interface I$MODEL_NAME$Repository extends RepositoryInterface
 {
 
 }
