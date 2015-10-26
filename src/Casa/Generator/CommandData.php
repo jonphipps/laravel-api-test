@@ -137,7 +137,7 @@ class CommandData
 
             '$NAMESPACE_REQUEST$'        => Config::get('generator.namespace_request', 'App\Http\Requests'),
 
-            '$NAMESPACE_REPOSITORY$'     => Config::get('generator.namespace_repository', 'App\Libraries\Repositories'),
+            '$NAMESPACE_REPOSITORY$'     => Config::get('generator.namespace_repository', 'App\Repositories'),
 
             '$NAMESPACE_MODEL$'          => Config::get('generator.namespace_model', 'App\Models'),
 

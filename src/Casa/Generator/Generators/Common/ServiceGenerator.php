@@ -18,7 +18,7 @@ class ServiceGenerator implements GeneratorProvider
     public function __construct($commandData)
     {
         $this->commandData = $commandData;
-        $this->path = Config::get('generator.path_service', app_path('Service/'));
+        $this->path = Config::get('generator.path_service', app_path('Services/'));
     }
 
     public function generate()
