@@ -26,7 +26,7 @@ return [
 
     'path_model'               => app_path('Entities/'),
 
-    'path_repository'          => app_path('Libraries/Repositories/'),
+    'path_repository'          => app_path('Repositories/'),
 
     'path_service'          => app_path('Services/'),
 
@@ -55,7 +55,7 @@ return [
 
     'namespace_model'          => 'App\Entities',
 
-    'namespace_repository'     => 'App\Libraries\Repositories',
+    'namespace_repository'     => 'App\Repositories',
 
     'namespace_controller'     => 'App\Http\Controllers',
 
