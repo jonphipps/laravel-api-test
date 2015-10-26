@@ -99,6 +99,11 @@ class CommandData
         return $fields;
     }
 
+    public function getFKs()
+    {
+
+    }
+
     public function initDynamicVariables()
     {
         $this->dynamicVars = self::getConfigDynamicVariables();

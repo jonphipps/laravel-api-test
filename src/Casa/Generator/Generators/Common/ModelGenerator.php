@@ -2,6 +2,8 @@
 
 namespace Casa\Generator\Generators\Common;
 
+use Casa\Generator\Utils\DataBaseHelper;
+use Casa\Generator\Utils\StringUtils;
 use Config;
 use Casa\Generator\CommandData;
 use Casa\Generator\Generators\GeneratorProvider;
@@ -18,7 +20,7 @@ class ModelGenerator implements GeneratorProvider
     public function __construct($commandData)
     {
         $this->commandData = $commandData;
-        $this->path = Config::get('generator.path_model', app_path('Models/'));
+        $this->path = Config::get('generator.path_model', app_path('Entities/'));
     }
 
     public function generate()
@@ -64,7 +66,26 @@ class ModelGenerator implements GeneratorProvider
 
         $templateData = str_replace('$CAST$', implode(",\n\t\t", $this->generateCasts()), $templateData);
 
+        $templateData = str_replace('$RELATIONS$', $this->generateRelations(), $templateData);
+
         return $templateData;
+    }
+
+    private function generateRelations()
+    {
+        if ($this->commandData->tableName == '') exit;
+        $relations = DataBaseHelper::getForeignKeysFromTable($this->commandData->tableName);
+        $code = '';
+
+        foreach($relations as $r)
+        {
+            $code .= "public function " . StringUtils::singularize($r->referenced_table_name) ."() {\n";
+            $code .= "\t" . '$this->belongsTo(' .  "'" . ucfirst(StringUtils::singularize($r->referenced_table_name)) .", '". $r->column_name . "') \n";
+            $code .= "}\n\n";
+        }
+
+        return $code;
+
     }
 
     private function generateRules()
