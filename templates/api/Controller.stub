@@ -105,7 +105,7 @@ class $MODEL_NAME$APIController extends AppBaseController
 		/** @var $MODEL_NAME$ $$MODEL_NAME_CAMEL$ */
 		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->apiFindOrFail($id);
 
-		$result = $this->$MODEL_NAME_CAMEL$Repository->updateRich($input, $id);
+		$result = $this->$MODEL_NAME_CAMEL$Repository->update($input, $id);
 
 		$$MODEL_NAME_CAMEL$ = $$MODEL_NAME_CAMEL$->fresh();
 

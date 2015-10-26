@@ -141,7 +141,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 
-		$$MODEL_NAME_CAMEL$ = $this->repo->updateRich($request->all(), $id);
+		$$MODEL_NAME_CAMEL$ = $this->repo->update($request->all(), $id);
 
 		Flash::success('$MODEL_NAME$ atualizado com sucesso.');
 

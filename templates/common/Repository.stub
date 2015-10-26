@@ -7,12 +7,6 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 
-//Separar essa interface em outro arquivo
-interface I$MODEL_NAME$Repository extends RepositoryInterface
-{
-
-}
-
 class $MODEL_NAME$Repository extends BaseRepository implements I$MODEL_NAME$Repository
 {
 
