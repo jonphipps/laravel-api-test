@@ -34,5 +34,14 @@ class DataBaseHelper
         return $results;
     }
 
+    public static function getReferencesFromTable($tableName)
+    {
+        $sql = 'SELECT * FROM information_schema.KEY_COLUMN_USAGE ';
+        $sql .= 'WHERE REFERENCED_COLUMN_NAME IS NOT NULL AND REFERENCED_TABLE_SCHEMA = DATABASE()';
+        $sql .= " AND REFERENCED_TABLE_NAME = '$tableName'";
+        $results = DB::select($sql);
+        return $results;
+    }
+
 
 }

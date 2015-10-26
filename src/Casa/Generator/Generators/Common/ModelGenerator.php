@@ -74,14 +74,24 @@ class ModelGenerator implements GeneratorProvider
     private function generateRelations()
     {
         if ($this->commandData->tableName == '') exit;
-        $relations = DataBaseHelper::getForeignKeysFromTable($this->commandData->tableName);
         $code = '';
 
+        //Get what tables it belongs to
+        $relations = DataBaseHelper::getForeignKeysFromTable($this->commandData->tableName);
         foreach($relations as $r)
         {
-            $code .= "public function " . StringUtils::singularize($r->referenced_table_name) ."() {\n";
-            $code .= "\t" . '$this->belongsTo(' .  "'" . ucfirst(StringUtils::singularize($r->referenced_table_name)) .", '". $r->column_name . "'); \n";
-            $code .= "}\n\n";
+            $code .= "\tpublic function " . StringUtils::singularize($r->REFERENCED_TABLE_NAME) ."() {\n";
+            $code .= "\t\t" . '$this->belongsTo(' .  "'" . ucfirst(StringUtils::singularize($r->REFERENCED_TABLE_NAME)) ."', '". $r->COLUMN_NAME . "'); \n";
+            $code .= "\t}\n\n";
+        }
+
+        //Get what tables it is referended
+        $relations = DataBaseHelper::getReferencesFromTable($this->commandData->tableName);
+        foreach($relations as $r)
+        {
+            $code .= "\tpublic function " . StringUtils::singularize($r->REFERENCED_TABLE_NAME) ."() {\n";
+            $code .= "\t\t" . '$this->hasMany(' .  "'" . ucfirst(StringUtils::singularize($r->REFERENCED_TABLE_NAME)) ."', '". $r->COLUMN_NAME . "'); \n";
+            $code .= "\t}\n\n";
         }
 
         return $code;
