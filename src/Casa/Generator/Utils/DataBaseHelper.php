@@ -7,7 +7,7 @@
  */
 
 namespace Casa\Generator\Utils;
-
+use DB;
 
 class DataBaseHelper
 {

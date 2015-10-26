@@ -15,54 +15,54 @@ class TableFieldsGenerator
     /** @var \Doctrine\DBAL\Schema\Table  */
     public $table;
 
-//	/** @var array  */
-//	public $dates = [];
+	/** @var array  */
+	public $dates = [];
 //
-//	/** @var array  */
-//	public $uniqueFields = [];
+	/** @var array  */
+	public $uniqueFields = [];
 
     public function __construct($tableName)
     {
         $this->tableName = $tableName;
         $this->schema = DB::getDoctrineSchemaManager($tableName);
-//		$this->table = $this->schema->listTableDetails($tableName);
+		$this->table = $this->schema->listTableDetails($tableName);
 
-//		$this->analyzeIndexes();
+		$this->analyzeIndexes();
     }
 
-//	private function analyzeIndexes()
-//	{
-//		$indexes = $this->table->getIndexes();
-//
-//		$this->uniqueFields = [];
-//
-//		foreach($indexes as $index)
-//		{
-//			if($index->isPrimary())
-//			{
-//				$columns = $index->getColumns();
-//
-//				if(sizeof($columns) == 1)
-//				{
-//					$this->primaryKey = $columns[0];
-//				}
-//			}
-//
-//			if($index->isUnique())
-//			{
-//				$columns = $index->getColumns();
-//
-//				if(sizeof($columns) == 1)
-//				{
-//					$column = $columns[0];
-//					if($column != $this->primaryKey)
-//					{
-//						$this->uniqueFields[] = $column;
-//					}
-//				}
-//			}
-//		}
-//	}
+	private function analyzeIndexes()
+	{
+		$indexes = $this->table->getIndexes();
+
+		$this->uniqueFields = [];
+
+		foreach($indexes as $index)
+		{
+			if($index->isPrimary())
+			{
+				$columns = $index->getColumns();
+
+				if(sizeof($columns) == 1)
+				{
+					$this->primaryKey = $columns[0];
+				}
+			}
+
+			if($index->isUnique())
+			{
+				$columns = $index->getColumns();
+
+				if(sizeof($columns) == 1)
+				{
+					$column = $columns[0];
+					if($column != $this->primaryKey)
+					{
+						$this->uniqueFields[] = $column;
+					}
+				}
+			}
+		}
+	}
 
     public function generateFieldsFromTable()
     {
