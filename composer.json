@@ -5,6 +5,9 @@
         "laravel",
         "api",
         "model",
+        "service",
+        "interface",
+        "validator",
         "migration",
         "scaffold",
         "CRUD",
@@ -13,8 +16,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Mitul Golakiya",
-            "email": "me@mitul.me"
+            "name": "Julio Alves",
+            "email": "julio.cesar.alves@gmail.com"
         }
     ],
     "require": {
@@ -23,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Mitul\\": "src/Mitul/"
+            "Casa\\": "src/Casa/"
         }
     },
     "suggest": {

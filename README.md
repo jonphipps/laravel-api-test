@@ -12,6 +12,9 @@ The artisan command can generate the following items:
   * Migration File
   * Model
   * Repository
+  * Interface
+  * Validator
+  * Service
   * Controller
   * View
     * index.blade.php
@@ -100,6 +103,7 @@ Config file (```config/generator.php```) contains path for all generated files
 ```path_migration``` - Path where Migration file to be generated<br>
 ```path_model``` - Path where Model file to be generated<br>
 ```path_repository``` - Path where Repository file to be generated<br>
+```path_service``` - Path where Service file to be generated<br>
 ```path_controller``` - Path where Controller file to be generated<br>
 ```path_api_controller``` - Path where API Controller file to be generated<br>
 ```path_views``` - Path where views will be created<br>
