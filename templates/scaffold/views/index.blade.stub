@@ -38,7 +38,7 @@
 						   <span class="caption-helper">gerenciar {!! $displayName !!} ...</span>
 					   </div>
 					   <div class="actions">
-						   <a class="btn btn-circle green" href="javascript:;">
+						   <a class="btn btn-circle green" href="/$MODEL_NAME_PLURAL_CAMEL$/create">
 							   <i class="fa fa-plus"></i>
 								<span class="hidden-480">
 								Adicionar </span>
