@@ -141,15 +141,34 @@ class TableFieldsGenerator
                 $type = 'email';
             }
 
+
             if (!empty($fieldInput)) {
                 //				$fieldInput .= $this->checkForDefault($column);
 //				$fieldInput .= $this->checkForNullable($column);
 //				$fieldInput .= $this->checkForUnique($column);
-                $fields [] = GeneratorUtils::processFieldInput($fieldInput, $type, '');
+                $fields [] = GeneratorUtils::processFieldInput($fieldInput, $type, $this->getValidations($column));
             }
         }
 
         return $fields;
+    }
+
+    private function getValidations(\Doctrine\DBAL\Schema\Column $column)
+    {
+        $validations = '';
+
+        if ($column->getAutoincrement()) return '';
+
+        if (strtolower($column->getName()) == 'email')
+            $validations .= 'email|';
+
+        if ($column->getNotnull())
+            $validations .= 'required|';
+
+        if ($column->getLength()>0)
+            $validations .= 'max:' . $column->getLength();
+
+        return $validations;
     }
 
     /**
@@ -230,42 +249,42 @@ class TableFieldsGenerator
         return $fieldInput;
     }
 
-//	/**
-//	 * @param \Doctrine\DBAL\Schema\Column $column
-//	 *
-//	 * @return string
-//	 */
-//	private function checkForNullable($column)
-//	{
-//		if(!$column->getNotnull())
-//			return ":nullable";
-//
-//		return '';
-//	}
-//
-//	/**
-//	 * @param \Doctrine\DBAL\Schema\Column $column
-//	 *
-//	 * @return string
-//	 */
-//	private function checkForDefault($column)
-//	{
-//		if($column->getDefault())
-//			return ":default," . $column->getDefault();
-//
-//		return '';
-//	}
-//
-//	/**
-//	 * @param \Doctrine\DBAL\Schema\Column $column
-//	 *
-//	 * @return string
-//	 */
-//	private function checkForUnique($column)
-//	{
-//		if(in_array($column->getName(), $this->uniqueFields))
-//			return ":unique";
-//
-//		return '';
-//	}
+	/**
+	 * @param \Doctrine\DBAL\Schema\Column $column
+	 *
+	 * @return string
+	 */
+	private function checkForNullable($column)
+	{
+		if(!$column->getNotnull())
+			return ":nullable";
+
+		return '';
+	}
+
+	/**
+	 * @param \Doctrine\DBAL\Schema\Column $column
+	 *
+	 * @return string
+	 */
+	private function checkForDefault($column)
+	{
+		if($column->getDefault())
+			return ":default," . $column->getDefault();
+
+		return '';
+	}
+
+	/**
+	 * @param \Doctrine\DBAL\Schema\Column $column
+	 *
+	 * @return string
+	 */
+	private function checkForUnique($column)
+	{
+		if(in_array($column->getName(), $this->uniqueFields))
+			return ":unique";
+
+		return '';
+	}
 }

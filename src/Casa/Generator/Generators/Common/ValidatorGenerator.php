@@ -25,6 +25,8 @@ class ValidatorGenerator implements GeneratorProvider
     {
         $templateData = $this->commandData->templatesHelper->getTemplate('Validator', 'common');
 
+        $templateData = str_replace('$RULES$', implode(",\n\t\t", $this->generateRules()), $templateData);
+
         $templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
 
         $fileName = $this->commandData->modelName.'Validator.php';
@@ -39,4 +41,19 @@ class ValidatorGenerator implements GeneratorProvider
         $this->commandData->commandObj->comment("\nValidato created: ");
         $this->commandData->commandObj->info($fileName);
     }
+
+    private function generateRules()
+    {
+        $rules = [];
+
+        foreach ($this->commandData->inputFields as $field) {
+            if (!empty($field['validations'])) {
+                $rule = '"'.$field['fieldName'].'" => "'.$field['validations'].'"';
+                $rules[] = $rule;
+            }
+        }
+
+        return $rules;
+    }
+
 }

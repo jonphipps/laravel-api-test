@@ -4,7 +4,7 @@ use Prettus\Validator\LaravelValidator;
 class $MODEL_NAME$Validator extends LaravelValidator
 {
     protected $rules = [
-        //'' => 'required|max:100',
+        $RULES$
     ];
 
 }

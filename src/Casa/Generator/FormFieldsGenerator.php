@@ -33,7 +33,9 @@ class FormFieldsGenerator
     {
         $textField = self::generateLabel($field);
 
-        $textField .= "\n\t{!! Form::text('\$FIELD_NAME\$', null, ['class' => 'form-control']) !!}";
+        $validatorInput = self::getInputValidators($field);
+
+        $textField .= "\n\t{!! Form::text('\$FIELD_NAME\$', null, [". $validatorInput . "'class' => 'form-control']) !!}";
 
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
@@ -46,7 +48,9 @@ class FormFieldsGenerator
     {
         $textareaField = self::generateLabel($field);
 
-        $textareaField .= "\n\t{!! Form::textarea('\$FIELD_NAME\$', null, ['class' => 'form-control']) !!}";
+        $validatorInput = self::getInputValidators($field);
+
+        $textareaField .= "\n\t{!! Form::textarea('\$FIELD_NAME\$', null, [". $validatorInput . "'class' => 'form-control']) !!}";
 
         $templateData = str_replace('$FIELD_INPUT$', $textareaField, $templateData);
 
@@ -59,7 +63,9 @@ class FormFieldsGenerator
     {
         $textField = self::generateLabel($field);
 
-        $textField .= "\n\t{!! Form::password('\$FIELD_NAME\$', ['class' => 'form-control']) !!}";
+        $validatorInput = self::getInputValidators($field);
+
+        $textField .= "\n\t{!! Form::password('\$FIELD_NAME\$', [". $validatorInput . "'class' => 'form-control']) !!}";
 
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
@@ -72,7 +78,9 @@ class FormFieldsGenerator
     {
         $textField = self::generateLabel($field);
 
-        $textField .= "\n\t{!! Form::email('\$FIELD_NAME\$', null, ['class' => 'form-control']) !!}";
+        $validatorInput = self::getInputValidators($field);
+
+        $textField .= "\n\t{!! Form::email('\$FIELD_NAME\$', null, [". $validatorInput . "'class' => 'form-control']) !!}";
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
         $templateData = self::replaceFieldVars($templateData, $field);
@@ -83,6 +91,8 @@ class FormFieldsGenerator
     public static function file($templateData, $field)
     {
         $textField = self::generateLabel($field);
+
+        $validatorInput = self::getInputValidators($field);
 
         $textField .= "\n\t{!! Form::file('\$FIELD_NAME\$') !!}";
 
@@ -190,5 +200,14 @@ class FormFieldsGenerator
         $templateData = self::replaceFieldVars($templateData, $field);
 
         return $templateData;
+    }
+
+    private static function getInputValidators($field)
+    {
+        $val = '';
+        if (strpos($field['validations'], 'required')>=0)
+            $val = "'required' => 'required', ";
+
+        return $val;
     }
 }
