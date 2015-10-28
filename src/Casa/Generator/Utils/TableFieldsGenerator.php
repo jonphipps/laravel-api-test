@@ -78,8 +78,8 @@ class TableFieldsGenerator
                     {
                         $type = 'select';
                         $tableSourceName = $this->checkForForeignKeySourceTable($column);
-
-                        $fieldInput['typeOptions'] = $tableSourceName;
+                        $this->commandData->commandObj->comment("\nV: $tableSourceName");
+                        if ($tableSourceName <> '') $type .= $tableSourceName;
                     }
                     else
                         $type = 'number';
