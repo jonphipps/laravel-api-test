@@ -75,7 +75,12 @@ class TableFieldsGenerator
                 case 'integer':
                     $fieldInput = $this->generateIntFieldInput($column->getName(), 'integer', $column);
                     if ( strpos($column->getName(), '_id' )>0)
+                    {
                         $type = 'select';
+                        $tableSourceName = $this->checkForForeignKeySourceTable($column);
+
+                        $fieldInput['typeOptions'] = $tableSourceName;
+                    }
                     else
                         $type = 'number';
                     break;
@@ -287,4 +292,18 @@ class TableFieldsGenerator
 
 		return '';
 	}
+
+    public function checkForForeignKeySourceTable($column)
+    {
+        // @var Doctrine\DBAL\Schema\ForeignKeyConstraint[]
+        $fks = $this->schema->listTableForeignKeys($this->table->getName());
+        foreach ($fks as $f)
+        {
+            if (in_array($column->getName(), $f->getColumns()))
+            {
+                return $f->getForeignTableName();
+            }
+        }
+        return '';
+    }
 }

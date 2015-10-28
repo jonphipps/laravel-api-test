@@ -35,7 +35,7 @@ class FormFieldsGenerator
 
         $validatorInput = self::getInputValidators($field);
 
-        $textField .= "\n\t{!! Form::text('\$FIELD_NAME\$', null, [". $validatorInput . "'class' => 'form-control']) !!}";
+        $textField .= "\n\t{!! Form::text('\$FIELD_NAME\$', null, [" . $validatorInput . "'class' => 'form-control']) !!}";
 
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
@@ -50,7 +50,7 @@ class FormFieldsGenerator
 
         $validatorInput = self::getInputValidators($field);
 
-        $textareaField .= "\n\t{!! Form::textarea('\$FIELD_NAME\$', null, [". $validatorInput . "'class' => 'form-control']) !!}";
+        $textareaField .= "\n\t{!! Form::textarea('\$FIELD_NAME\$', null, [" . $validatorInput . "'class' => 'form-control']) !!}";
 
         $templateData = str_replace('$FIELD_INPUT$', $textareaField, $templateData);
 
@@ -65,7 +65,7 @@ class FormFieldsGenerator
 
         $validatorInput = self::getInputValidators($field);
 
-        $textField .= "\n\t{!! Form::password('\$FIELD_NAME\$', [". $validatorInput . "'class' => 'form-control']) !!}";
+        $textField .= "\n\t{!! Form::password('\$FIELD_NAME\$', [" . $validatorInput . "'class' => 'form-control']) !!}";
 
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
@@ -80,7 +80,7 @@ class FormFieldsGenerator
 
         $validatorInput = self::getInputValidators($field);
 
-        $textField .= "\n\t{!! Form::email('\$FIELD_NAME\$', null, [". $validatorInput . "'class' => 'form-control']) !!}";
+        $textField .= "\n\t{!! Form::email('\$FIELD_NAME\$', null, [" . $validatorInput . "'class' => 'form-control']) !!}";
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
         $templateData = self::replaceFieldVars($templateData, $field);
@@ -125,16 +125,18 @@ class FormFieldsGenerator
     {
         $textField = self::generateLabel($field);
 
-        if (count($field['typeOptions']) > 0) {
+        if (count($field['typeOptions']) > 0)
+        {
             $arr = explode(',', $field['typeOptions']);
 
-            foreach ($arr as $item) {
+            foreach ($arr as $item)
+            {
                 $label = Str::title(str_replace('_', ' ', $item));
 
                 $textField .= "\n\t<div class=\"radio-inline\">";
                 $textField .= "\n\t\t<label>";
 
-                $textField .= "\n\t\t\t{!! Form::radio('\$FIELD_NAME\$', '".$item."', null) !!} $label";
+                $textField .= "\n\t\t\t{!! Form::radio('\$FIELD_NAME\$', '" . $item . "', null) !!} $label";
 
                 $textField .= "\n\t\t</label>";
                 $textField .= "\n\t</div>";
@@ -172,27 +174,39 @@ class FormFieldsGenerator
         return $templateData;
     }
 
-    public static function select($templateData, $field)
+    public static function select($templateData, $field, $inputArray = true)
     {
         $textField = self::generateLabel($field);
 
-        $textField .= "\n\t{!! Form::select('\$FIELD_NAME\$', \$INPUT_ARR\$, null, ['class' => 'form-control']) !!}";
+        $validatorInput = self::getInputValidators($field);
+
+        $textField .= "\n\t{!! Form::select('\$FIELD_NAME\$', \$INPUT_ARR\$, null, [" . $validatorInput . "'class' => 'form-control']) !!}";
         $textField = str_replace('$FIELD_NAME$', $field['fieldName'], $textField);
 
-        if (count($field['typeOptions']) > 0) {
-            $arr = explode(',', $field['typeOptions']);
-            $inputArr = '[';
-            foreach ($arr as $item) {
-                $inputArr .= " '$item' => '$item',";
+        //If options will be an array
+        if ($inputArray)
+        {
+            if (count($field['typeOptions']) > 0)
+            {
+                $arr = explode(',', $field['typeOptions']);
+                $inputArr = '[';
+                foreach ($arr as $item)
+                {
+                    $inputArr .= " '$item' => '$item',";
+                }
+
+                $inputArr = substr($inputArr, 0, strlen($inputArr) - 1);
+
+                $inputArr .= ' ]';
+
+                $textField = str_replace('$INPUT_ARR$', $inputArr, $textField);
+            }
+            else
+            {
+                $textField = str_replace('$INPUT_ARR$', '[]', $textField);
             }
 
-            $inputArr = substr($inputArr, 0, strlen($inputArr) - 1);
 
-            $inputArr .= ' ]';
-
-            $textField = str_replace('$INPUT_ARR$', $inputArr, $textField);
-        } else {
-            $textField = str_replace('$INPUT_ARR$', '[]', $textField);
         }
 
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
@@ -205,8 +219,13 @@ class FormFieldsGenerator
     private static function getInputValidators($field)
     {
         $val = '';
-        if (strpos($field['validations'], 'required')>=0)
-            $val = "'required' => 'required', ";
+        if (strpos($field['validations'], 'required') >= 0)
+            $val = "'required' => 'required' ";
+        if ($val != '') $val .= ', ';
+
+        if (strpos($field['validations'], 'max') >= 0)
+            //$val = "'required' => 'required' ";
+            //'maxlength' => 10
 
         return $val;
     }
