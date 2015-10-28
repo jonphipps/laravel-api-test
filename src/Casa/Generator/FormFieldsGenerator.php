@@ -184,9 +184,10 @@ class FormFieldsGenerator
         $textField = str_replace('$FIELD_NAME$', $field['fieldName'], $textField);
 
         //If options will be an array
-        if ($inputArray)
+        if (count($field['typeOptions']) > 0)
         {
-            if (count($field['typeOptions']) > 0)
+
+            if ($inputArray)
             {
                 $arr = explode(',', $field['typeOptions']);
                 $inputArr = '[';
@@ -203,10 +204,15 @@ class FormFieldsGenerator
             }
             else
             {
-                $textField = str_replace('$INPUT_ARR$', '[]', $textField);
+                $modelName = $field['typeOptions'];
+                $inputArr = "$modelName::all()";
+                $textField = str_replace('$INPUT_ARR$', $inputArr, $textField);
             }
 
-
+        }
+        else
+        {
+            $textField = str_replace('$INPUT_ARR$', '[]', $textField);
         }
 
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
