@@ -206,7 +206,9 @@ class FormFieldsGenerator
             else
             {
                 $options = explode($field['typeOptions'], ':');
-                $modelName = Str::title(Str::camel( Str::singular($options[0])));
+                $modelName = Config::get('generator.namespace_model') . "\\" .
+                    Str::title(Str::camel( Str::singular($options[0])));
+
                 $columnNameToList = $options[1];
                 $inputArr = "$modelName::lists('$columnNameToList','id')";
                 $textField = str_replace('$INPUT_ARR$', $inputArr, $textField);

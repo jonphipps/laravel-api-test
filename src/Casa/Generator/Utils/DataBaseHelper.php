@@ -51,7 +51,7 @@ class DataBaseHelper
         /** @var \Doctrine\DBAL\Schema\Table  */
         $table = $schema->listTableDetails($tableName);
 
-        return $table->columns[$index];
+        return $table->getColumns[$index]->getName();
 
     }
 
