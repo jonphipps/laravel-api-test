@@ -2,6 +2,7 @@
 
 namespace Casa\Generator;
 
+use Casa\Generator\Utils\DataBaseHelper;
 use Illuminate\Support\Str;
 
 class FormFieldsGenerator
@@ -204,8 +205,10 @@ class FormFieldsGenerator
             }
             else
             {
-                $modelName = Str::title(Str::camel( Str::singular($field['typeOptions'])));
-                $inputArr = "$modelName::all()";
+                $options = explode($field['typeOptions'], ':');
+                $modelName = Str::title(Str::camel( Str::singular($options[0])));
+                $columnNameToList = $options[1];
+                $inputArr = "$modelName::lists('$columnNameToList')";
                 $textField = str_replace('$INPUT_ARR$', $inputArr, $textField);
             }
 

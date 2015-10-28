@@ -43,5 +43,16 @@ class DataBaseHelper
         return $results;
     }
 
+    public static function getColumnFromTable($tableName, $index)
+    {
+        /** @var \Doctrine\DBAL\Schema\AbstractSchemaManager  */
+        $schema = DB::getDoctrineSchemaManager($tableName);
+
+        /** @var \Doctrine\DBAL\Schema\Table  */
+        $table = $schema->listTableDetails($tableName);
+
+        return $table->columns[$index];
+
+    }
 
 }
