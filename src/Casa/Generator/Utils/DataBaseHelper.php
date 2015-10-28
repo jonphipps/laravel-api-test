@@ -51,7 +51,15 @@ class DataBaseHelper
         /** @var \Doctrine\DBAL\Schema\Table  */
         $table = $schema->listTableDetails($tableName);
 
-        return $table->getColumns[$index]->getName();
+        $columns =  $table->getColumns();
+        $i=0;
+
+        foreach($columns as $c)
+        {
+            if ($i == $index)
+                return $c->getName();
+        }
+        return '';
 
     }
 

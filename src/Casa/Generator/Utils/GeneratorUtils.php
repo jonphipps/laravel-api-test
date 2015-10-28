@@ -43,6 +43,10 @@ class GeneratorUtils
             $typeOptions = [];
         }
 
+        if (count($typeOptions) > 2) {
+            $typeOptions .= ':' . $typeOptions[2];
+        }
+
         return [
             'fieldName'       => $fieldName,
             'type'            => $type,
