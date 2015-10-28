@@ -7,7 +7,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 
-class $MODEL_NAME$Repository extends $BASE_REPOSITORY$ implements I$MODEL_NAME$Repository
+class $MODEL_NAME$Repository extends BaseRepository implements I$MODEL_NAME$Repository
 {
 
     /**
