@@ -77,7 +77,8 @@ class TableFieldsGenerator
                     if ( strpos($column->getName(), '_id' )>0)
                     {
                         $type = 'select';
-                        $tableSourceName = $this->checkForForeignKeySourceTable($column);
+
+                        $tableSourceName = $this->checkForForeignKeySourceTable($column->getName());
                         if ($tableSourceName <> '') $type .= ':' .  $tableSourceName;
                     }
                     else
@@ -292,13 +293,13 @@ class TableFieldsGenerator
 		return '';
 	}
 
-    public function checkForForeignKeySourceTable($column)
+    public function checkForForeignKeySourceTable($columnName)
     {
         // @var Doctrine\DBAL\Schema\ForeignKeyConstraint[]
         $fks = $this->schema->listTableForeignKeys($this->table->getName());
         foreach ($fks as $f)
         {
-            if (in_array($column->getName(), $f->getColumns()))
+            if (in_array($columnName, $f->getColumns()))
             {
                 return $f->getForeignTableName();
             }

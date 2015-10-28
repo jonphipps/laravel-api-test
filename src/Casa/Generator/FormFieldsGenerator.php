@@ -204,7 +204,7 @@ class FormFieldsGenerator
             }
             else
             {
-                $modelName = $field['typeOptions'];
+                $modelName = Str::title(Str::camel( Str::singular($field['typeOptions'])));
                 $inputArr = "$modelName::all()";
                 $textField = str_replace('$INPUT_ARR$', $inputArr, $textField);
             }
