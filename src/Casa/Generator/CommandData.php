@@ -136,6 +136,8 @@ class CommandData
 
             '$BASE_CONTROLLER$'          => Config::get('generator.base_controller', 'Casa\Controller\AppBaseController'),
 
+            '$BASE_REPOSITORY$'          => Config::get('generator.base_repository', 'App\Repositories\AppBaseRepository'),
+
             '$NAMESPACE_CONTROLLER$'     => Config::get('generator.namespace_controller', 'App\Http\Controllers'),
 
             '$NAMESPACE_API_CONTROLLER$' => Config::get('generator.namespace_api_controller', 'App\Http\Controllers\API'),

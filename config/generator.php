@@ -13,6 +13,8 @@ return [
 
     'base_controller'          => 'Casa\Controller\AppBaseController',
 
+    'base_repository'          => 'Casa\Repositories\AppBaseRepository',
+
     /*
     |--------------------------------------------------------------------------
     | Path for classes
