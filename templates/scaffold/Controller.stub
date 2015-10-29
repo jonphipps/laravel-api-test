@@ -11,12 +11,25 @@ use App\Services\$MODEL_NAME$Service;
 use Illuminate\Http\Request;
 use yajra\Datatables\Datatables;
 use yajra\Datatables\Html\Builder;
+use Casa\Traits\Select2ableTrait;
+use App\Entities\$MODEL_NAME$;
 
 class $MODEL_NAME$Controller extends AppBaseController
 {
+	use Select2ableTrait;
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Builder
+	 */
+	protected function getQuery()
+	{
+		return $MODEL_NAME$::query();
+	}
+
 	/** @var  $MODEL_NAME$Repository */
 	private $repo;
 
+	public $displayAttribute;
 	/**
 	 * @var Builder
 	 */
@@ -24,7 +37,9 @@ class $MODEL_NAME$Controller extends AppBaseController
 
 	function __construct($MODEL_NAME$Repository $$MODEL_NAME_CAMEL$Repo)
 	{
+		$this->displayAttribute = '$DISPLAY_ATTRIBUTE$';
 		$this->repo = $$MODEL_NAME_CAMEL$Repo;
+
 	}
 
 	/**

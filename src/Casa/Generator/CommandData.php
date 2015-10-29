@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Casa\Generator\Commands\APIGeneratorCommand;
 use Casa\Generator\File\FileHelper;
 use Casa\Generator\Utils\GeneratorUtils;
+use Casa\Generator\Utils\DataBaseHelper;
 
 class CommandData
 {
@@ -116,6 +117,9 @@ class CommandData
             '$MODEL_NAME_PLURAL$'       => $this->modelNamePlural,
 
             '$MODEL_NAME_PLURAL_CAMEL$' => $this->modelNamePluralCamel,
+
+            '$DISPLAY_ATTRIBUTE$' => DataBaseHelper::getColumnFromTable($this->tableName),
+
         ]);
 
         if ($this->tableName) {
