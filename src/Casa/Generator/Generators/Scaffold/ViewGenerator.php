@@ -80,7 +80,7 @@ class ViewGenerator implements GeneratorProvider
                     break;
                 case 'select':
                     if ($this->commandData->fromTable){
-                        $fieldsStr .= FormFieldsGenerator::select($fieldTemplate, $field, false)."\n\n";
+                        $fieldsStr .= FormFieldsGenerator::select2($fieldTemplate, $field, false)."\n\n";
                     }
 
                     else
