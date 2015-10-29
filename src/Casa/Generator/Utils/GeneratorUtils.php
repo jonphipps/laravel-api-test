@@ -35,16 +35,16 @@ class GeneratorUtils
             $fieldOptions[] = $fieldInputs[2];
         }
 
-        $typeOptions = explode(':', $type);
-        $type = $typeOptions[0];
-        if (count($typeOptions) > 1) {
-            $typeOptions = $typeOptions[1];
+        $options = explode(':', $type);
+        $type = $options[0];
+        if (count($options) > 1) {
+            $typeOptions = $options[1];
         } else {
             $typeOptions = [];
         }
 
-        if (count($typeOptions) > 2) {
-            $typeOptions .= ':' . $typeOptions[2];
+        if (count($options) > 2) {
+            $typeOptions .= ':' . $options[2];
         }
 
         return [

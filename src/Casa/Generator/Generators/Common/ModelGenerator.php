@@ -69,7 +69,14 @@ class ModelGenerator implements GeneratorProvider
 
         $templateData = str_replace('$RELATIONS$', $this->generateRelations(), $templateData);
 
+        $templateData = str_replace('$DISPLAY_ATTRIBUTE$', $this->getDisplayAttr(), $templateData);
+
         return $templateData;
+    }
+
+    private function getDisplayAttr()
+    {
+        return DataBaseHelper::getColumnFromTable($this->commandData->tableName);
     }
 
     private function generateRelations()

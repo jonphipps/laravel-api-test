@@ -79,9 +79,9 @@ class TableFieldsGenerator
                         $type = 'select';
 
                         $tableSourceName = $this->checkForForeignKeySourceTable($column->getName());
-                        $columnName = DataBaseHelper::getColumnFromTable($tableSourceName,1);
+                        $columnName = DataBaseHelper::getColumnFromTable($tableSourceName);
 
-                        if ($tableSourceName <> '') $type .= ':' .  $tableSourceName;
+                        if ($tableSourceName <> '') $type .= ':' .  $tableSourceName . ':' . $columnName;
                     }
                     else
                         $type = 'number';

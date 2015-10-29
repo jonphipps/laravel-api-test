@@ -43,7 +43,7 @@ class DataBaseHelper
         return $results;
     }
 
-    public static function getColumnFromTable($tableName, $index)
+    public static function getColumnFromTable($tableName, $type = 'string')
     {
         /** @var \Doctrine\DBAL\Schema\AbstractSchemaManager  */
         $schema = DB::getDoctrineSchemaManager($tableName);
@@ -52,11 +52,9 @@ class DataBaseHelper
         $table = $schema->listTableDetails($tableName);
 
         $columns =  $table->getColumns();
-        $i=0;
-
         foreach($columns as $c)
         {
-            if ($i == $index)
+            if ($c->getType()->getName() == $type)
                 return $c->getName();
         }
         return '';
