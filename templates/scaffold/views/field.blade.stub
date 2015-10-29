@@ -1,4 +1,4 @@
 <!-- $FIELD_NAME_TITLE$ Field -->
-<div class="form-group col-sm-12 col-lg-8">
+<div class="col-md-12">
     $FIELD_INPUT$
 </div>

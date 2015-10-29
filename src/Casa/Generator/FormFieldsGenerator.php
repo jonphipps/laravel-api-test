@@ -33,11 +33,11 @@ class FormFieldsGenerator
 
     public static function text($templateData, $field)
     {
-        $textField = self::generateLabel($field);
+        $textField ='';// self::generateLabel($field);
 
         $validatorInput = self::getInputValidators($field);
-
-        $textField .= "\n\t{!! Form::text('\$FIELD_NAME\$', null, [" . $validatorInput . "'class' => 'form-control']) !!}";
+        //Form::textField('Form::textField', 'textField')
+        $textField .= "\n\t{!! Form::textField('','\$FIELD_NAME\$', null, [" . $validatorInput . "'class' => 'form-control']) !!}";
 
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
@@ -154,9 +154,9 @@ class FormFieldsGenerator
 
     public static function number($templateData, $field)
     {
-        $textField = self::generateLabel($field);
-
-        $textField .= "\n\t{!! Form::number('\$FIELD_NAME\$', null, ['class' => 'form-control']) !!}";
+        $textField = ''; //= self::generateLabel($field);
+        //Form::numberField('Form::numberField', 'numberField')
+        $textField .= "\n\t{!! Form::numberField('','\$FIELD_NAME\$', null, ['class' => 'form-control']) !!}";
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
         $templateData = self::replaceFieldVars($templateData, $field);
@@ -169,6 +169,20 @@ class FormFieldsGenerator
         $textField = self::generateLabel($field);
 
         $textField .= "\n\t{!! Form::date('\$FIELD_NAME\$', null, ['class' => 'form-control form-control-inline input-medium date-picker']) !!}";
+        $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
+
+        $templateData = self::replaceFieldVars($templateData, $field);
+
+        return $templateData;
+    }
+
+    public static function date2($templateData, $field)
+    {
+        //$textField = self::generateLabel($field);
+        //Form::dateField('Date', 'date')
+
+        $textField = '';
+        $textField .= "\n\t{!! Form::dateField('','\$FIELD_NAME\$', null, ['datetime' => ['locale' => 'pt'],'class' => 'form-control date-picker']) !!}";
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
         $templateData = self::replaceFieldVars($templateData, $field);
@@ -244,8 +258,8 @@ class FormFieldsGenerator
 
     public static function select2($templateData, $field, $inputArray = true)
     {
-        $textField = self::generateLabel($field);
-
+        //$textField = self::generateLabel($field);
+        $textField ='';
         $validatorInput = self::getInputValidators($field);
         //Form::select2Field('Select2 Async Multiple', 'select2-async-multiple', [], [2, 3], ['select2' => ['ajax--url' => '/select2/data'], 'multiple' => true])
         $textField .= "\n\t{!! Form::select2Field('\$FIELD_NAME\$','select2-async-multiple', \$INPUT_ARR\$, null, ['select2' => ['ajax--url' => '\$URL_DATA\$'], " . $validatorInput . "'class' => 'form-control js-data-example-ajax']) !!}";

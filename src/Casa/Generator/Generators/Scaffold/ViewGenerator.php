@@ -76,7 +76,10 @@ class ViewGenerator implements GeneratorProvider
                     $fieldsStr .= FormFieldsGenerator::number($fieldTemplate, $field)."\n\n";
                     break;
                 case 'date':
-                    $fieldsStr .= FormFieldsGenerator::date($fieldTemplate, $field)."\n\n";
+                    if ($this->commandData->fromTable)
+                        $fieldsStr .= FormFieldsGenerator::date2($fieldTemplate, $field)."\n\n";
+                    else
+                        $fieldsStr .= FormFieldsGenerator::date($fieldTemplate, $field)."\n\n";
                     break;
                 case 'select':
                     if ($this->commandData->fromTable){

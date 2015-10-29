@@ -1,14 +1,79 @@
-@extends('app')
+@extends('layouts.master')
 
 @section('content')
 <div class="container">
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+									<span class="caption-subject font-green-sharp bold uppercase">
+									$MODEL_NAME$ </span>
+                <span class="caption-helper"> inserir novo registro</span>
+            </div>
+            <div class="actions btn-set">
+                <button type="button" name="back" class="btn btn-default btn-circle" onclick="history.back();"><i class="fa fa-angle-left"></i> Voltar</button>
+                <button class="btn btn-default btn-circle" onclick="document.getElementById('form1').reset();><i class="fa fa-reply"></i> Resetar</button>
+                <button class="btn green-haze btn-circle" onclick="document.getElementById('form1').submit();"><i class="fa fa-check" ></i> Salvar</button>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#tab_general" data-toggle="tab" aria-expanded="true">
+                            Geral </a>
+                    </li>
+                    {{--<li class="">--}}
+                        {{--<a href="#tab_meta" data-toggle="tab" aria-expanded="false">--}}
+                            {{--Meta </a>--}}
+                        {{--</li>--}}
+                </ul>
+                <div class="tab-content no-space">
+                    <div class="tab-pane active" id="tab_general">
+                        <div class="form-body">
 
-    @include('common.errors')
+                        @include('common.errors')
 
-    {!! Form::open(['route' => '$MODEL_NAME_PLURAL_CAMEL$.store']) !!}
+                        {!! Form::open(['route' => '$MODEL_NAME_PLURAL_CAMEL$.store', 'class' => 'form-horizontal form-row-seperated', 'id'=> 'form1' ]) !!}
 
-        @include('$MODEL_NAME_PLURAL_CAMEL$.fields')
-
+                            @include('$MODEL_NAME_PLURAL_CAMEL$.fields')
+                        </div>
+                    </div>
+                    {{--<div class="tab-pane" id="tab_meta">--}}
+                        {{--<div class="form-body">--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label class="col-md-2 control-label">Meta Title:</label>--}}
+                                {{--<div class="col-md-10">--}}
+                                    {{--<input type="text" class="form-control maxlength-handler" name="product[meta_title]" maxlength="100" placeholder="">--}}
+                                    {{--<span class="help-block">--}}
+														{{--max 100 chars </span>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label class="col-md-2 control-label">Meta Keywords:</label>--}}
+                                {{--<div class="col-md-10">--}}
+                                    {{--<textarea class="form-control maxlength-handler" rows="8" name="product[meta_keywords]" maxlength="1000"></textarea>--}}
+                                    {{--<span class="help-block">--}}
+														{{--max 1000 chars </span>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label class="col-md-2 control-label">Meta Description:</label>--}}
+                                {{--<div class="col-md-10">--}}
+                                    {{--<textarea class="form-control maxlength-handler" rows="8" name="product[meta_description]" maxlength="255"></textarea>--}}
+                                    {{--<span class="help-block">--}}
+														{{--max 255 chars </span>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                </div>
+            </div>
+        </div>
+    </div>
     {!! Form::close() !!}
 </div>
+
 @endsection
+
+
+
