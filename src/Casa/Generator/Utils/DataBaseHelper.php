@@ -8,6 +8,7 @@
 
 namespace Casa\Generator\Utils;
 use DB;
+use Mockery\CountValidator\Exception;
 
 class DataBaseHelper
 {
@@ -45,20 +46,27 @@ class DataBaseHelper
 
     public static function getColumnFromTable($tableName, $type = 'string')
     {
-        /** @var \Doctrine\DBAL\Schema\AbstractSchemaManager  */
-        $schema = DB::getDoctrineSchemaManager($tableName);
+        if ($tableName == '') return '';
+        try{
+            /** @var \Doctrine\DBAL\Schema\AbstractSchemaManager  */
+            $schema = DB::getDoctrineSchemaManager($tableName);
 
-        /** @var \Doctrine\DBAL\Schema\Table  */
-        $table = $schema->listTableDetails($tableName);
+            /** @var \Doctrine\DBAL\Schema\Table  */
+            $table = $schema->listTableDetails($tableName);
 
-        $columns =  $table->getColumns();
-        foreach($columns as $c)
+            $columns =  $table->getColumns();
+            foreach($columns as $c)
+            {
+                if ($c->getType()->getName() == $type)
+                    return $c->getName();
+            }
+
+        }
+        catch(Exception $ex)
         {
-            if ($c->getType()->getName() == $type)
-                return $c->getName();
+            return '';
         }
         return '';
-
     }
 
 }

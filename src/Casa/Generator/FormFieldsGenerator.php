@@ -256,18 +256,18 @@ class FormFieldsGenerator
         return $val;
     }
 
-    public static function select2($templateData, $field, $inputArray = true)
+    public static function select2($templateData, $field, $inputArray = true, $modelName = null)
     {
         //$textField = self::generateLabel($field);
         $textField ='';
         $validatorInput = self::getInputValidators($field);
         //Form::select2Field('Select2 Async Multiple', 'select2-async-multiple', [], [2, 3], ['select2' => ['ajax--url' => '/select2/data'], 'multiple' => true])
-        $textField .= "\n\t{!! Form::select2Field('\$FIELD_NAME\$','select2-async-multiple', \$INPUT_ARR\$, null, ['select2' => ['ajax--url' => '\$URL_DATA\$'], " . $validatorInput . "'class' => 'form-control js-data-example-ajax']) !!}";
-        $textField = str_replace('$FIELD_NAME$', $field['fieldName'], $textField);
+        $textField .= "\n\t{!! Form::select2Field('\$FIELD_NAME\$','\$FIELD_NAME\$', \$INPUT_ARR\$, [$\$MODEL_NAME\$->\$FIELD_NAME\$] , ['select2' => ['ajax--url' => '\$URL_DATA\$'], " . $validatorInput . "'class' => 'form-control js-data-example-ajax']) !!}";
 
-        $options = explode(':',$field['typeOptions']);
-        $modelName = Str::title(Str::camel( Str::singular($options[0])));
-        $urlData = "/" . Str::lower($options[0]) . "/select2search";
+        $textField = str_replace('$FIELD_NAME$', $field['fieldName'], $textField);
+        $textField = str_replace('$MODEL_NAME$', Str::singular(Str::lower($modelName)), $textField);
+
+        $urlData = "/" . Str::plural( Str::lower($modelName)) . "/select2search";
 
         $inputArr = "[]";
         $textField = str_replace('$INPUT_ARR$', $inputArr, $textField);
