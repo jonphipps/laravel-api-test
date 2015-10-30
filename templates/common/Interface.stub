@@ -1,0 +1,10 @@
+<?php namespace $NAMESPACE_REPOSITORY$;
+
+use $NAMESPACE_MODEL$\$MODEL_NAME$;
+use Prettus\Repository\Contracts\RepositoryInterface;
+
+
+interface I$MODEL_NAME$Repository extends RepositoryInterface
+{
+
+}

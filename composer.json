@@ -1,0 +1,38 @@
+{
+    "name": "julioalves/laravel-api-generator",
+    "description": "Laravel API/Scaffold/CRUD Generator from just one command with including Controller, Repository, Model, Migrations, routes.php update.",
+    "keywords": [
+        "laravel",
+        "api",
+        "model",
+        "service",
+        "interface",
+        "validator",
+        "migration",
+        "scaffold",
+        "CRUD",
+        "generator"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Julio Alves",
+            "email": "julio.cesar.alves@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/support": "5.1.*",
+        "prettus/l5-repository": "^2.1",
+        "prettus/laravel-validation": "^1.1"
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Casa\\": "src/Casa/"
+        }
+    },
+    "suggest": {
+        "doctrine/dbal": "Required to use generator from existing table."
+    }
+}

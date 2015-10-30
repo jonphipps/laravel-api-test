@@ -1,0 +1,21 @@
+
+// -------------- Routes for $MODEL_NAME_PLURAL_CAMEL$ ---------------------//
+Route::get('$MODEL_NAME_PLURAL_CAMEL$/data', ['as' => '$MODEL_NAME_PLURAL_CAMEL$.data',
+'uses' => '$MODEL_NAME$Controller@data',
+]);
+
+Route::get('$MODEL_NAME_PLURAL_CAMEL$/select2search', ['as' => '$MODEL_NAME_PLURAL_CAMEL$.select2search',
+'uses' => '$MODEL_NAME$Controller@select2search',
+]);
+
+Route::get('$MODEL_NAME_PLURAL_CAMEL$/init', ['as' => '$MODEL_NAME_PLURAL_CAMEL$.select2searchInit',
+'uses' => '$MODEL_NAME$Controller@select2searchInit',
+]);
+
+Route::resource('$MODEL_NAME_PLURAL_CAMEL$', '$MODEL_NAME$Controller');
+
+Route::get('$MODEL_NAME_PLURAL_CAMEL$/{id}/delete', [
+'as' => '$MODEL_NAME_PLURAL_CAMEL$.delete',
+'uses' => '$MODEL_NAME$Controller@destroy',
+]);
+// --------------------------------------------------------------------------//

@@ -1,0 +1,190 @@
+<?php namespace $NAMESPACE_CONTROLLER$;
+
+use $NAMESPACE_REQUEST$;
+use $NAMESPACE_REQUEST$\Create$MODEL_NAME$Request;
+use $NAMESPACE_REQUEST$\Update$MODEL_NAME$Request;
+use $NAMESPACE_REPOSITORY$\$MODEL_NAME$Repository;
+use Flash;
+use $BASE_CONTROLLER$ as AppBaseController;
+use Response;
+use App\Services\$MODEL_NAME$Service;
+use Illuminate\Http\Request;
+use yajra\Datatables\Datatables;
+use yajra\Datatables\Html\Builder;
+use Casa\Traits\Select2ableTrait;
+use App\Entities\$MODEL_NAME$;
+
+class $MODEL_NAME$Controller extends AppBaseController
+{
+	use Select2ableTrait;
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Builder
+	 */
+	protected function getQuery()
+	{
+		return $MODEL_NAME$::query();
+	}
+
+	/** @var  $MODEL_NAME$Repository */
+	private $repo;
+
+	public $displayAttribute;
+	/**
+	 * @var Builder
+	 */
+	private $htmlBuilder;
+
+	function __construct($MODEL_NAME$Repository $$MODEL_NAME_CAMEL$Repo)
+	{
+		$this->displayAttribute = '$DISPLAY_ATTRIBUTE$';
+		$this->repo = $$MODEL_NAME_CAMEL$Repo;
+
+	}
+
+	/**
+	 * Display a listing of the $MODEL_NAME$.
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
+
+      return \View::make('$MODEL_NAME_PLURAL_CAMEL$.index')
+            ->with(['displayName' => '$MODEL_NAME_PLURAL_CAMEL$']
+            );
+	}
+
+    public function data()
+    {
+        $$MODEL_NAME_PLURAL_CAMEL$Builder = $this->repo->search('',false);
+        return Datatables::of($$MODEL_NAME_PLURAL_CAMEL$Builder)
+            ->addColumn('actions', function ($model) {
+
+                return '<a class="btn default btn-xs purple" href="/$MODEL_NAME_PLURAL_CAMEL$/'.$model->id. '/edit'. '"><i class="fa fa-edit"></i> Editar </a>
+                <a href="/$MODEL_NAME_PLURAL_CAMEL$/'.$model->id. '/delete' . '" class="btn btn-xs red"><i class="glyphicon glyphicon-trash"></i> </a>';
+            })
+            ->make(true);
+
+    }
+
+	/**
+	 * Show the form for creating a new $MODEL_NAME$.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		return view('$MODEL_NAME_PLURAL_CAMEL$.create');
+	}
+
+	/**
+	 * Store a newly created $MODEL_NAME$ in storage.
+	 *
+	 * @param Create$MODEL_NAME$Request $request
+	 *
+	 * @return Response
+	 */
+	public function store(Create$MODEL_NAME$Request $request)
+	{
+		$input = $request->all();
+
+		$$MODEL_NAME_CAMEL$ = $this->repo->create($input);
+
+		Flash::success('$MODEL_NAME$ salvo com sucesso.');
+
+		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
+	}
+
+	/**
+	 * Display the specified $MODEL_NAME$.
+	 *
+	 * @param  int $id
+	 *
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		$$MODEL_NAME_CAMEL$ = $this->repo->find($id);
+
+		if(empty($$MODEL_NAME_CAMEL$))
+		{
+			Flash::error('$MODEL_NAME$ não encontrado');
+
+			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
+		}
+
+		return view('$MODEL_NAME_PLURAL_CAMEL$.show')->with('$MODEL_NAME_CAMEL$', $$MODEL_NAME_CAMEL$);
+	}
+
+	/**
+	 * Show the form for editing the specified $MODEL_NAME$.
+	 *
+	 * @param  int $id
+	 *
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		$$MODEL_NAME_CAMEL$ = $this->repo->find($id);
+
+		if(empty($$MODEL_NAME_CAMEL$))
+		{
+			Flash::error('$MODEL_NAME$ não encontrado');
+
+			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
+		}
+
+		return view('$MODEL_NAME_PLURAL_CAMEL$.edit')->with('$MODEL_NAME_CAMEL$', $$MODEL_NAME_CAMEL$);
+	}
+
+	/**
+	 * Update the specified $MODEL_NAME$ in storage.
+	 *
+	 * @param  int              $id
+	 * @param Update$MODEL_NAME$Request $request
+	 *
+	 * @return Response
+	 */
+	public function update($id, Update$MODEL_NAME$Request $request)
+	{
+		$$MODEL_NAME_CAMEL$ = $this->repo->find($id);
+
+		if(empty($$MODEL_NAME_CAMEL$))
+		{
+			Flash::error('$MODEL_NAME$ not found');
+			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
+		}
+
+		$$MODEL_NAME_CAMEL$ = $this->repo->update($request->all(), $id);
+
+		Flash::success('$MODEL_NAME$ atualizado com sucesso.');
+
+		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
+	}
+
+	/**
+	 * Remove the specified $MODEL_NAME$ from storage.
+	 *
+	 * @param  int $id
+	 *
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		$$MODEL_NAME_CAMEL$ = $this->repo->find($id);
+
+		if(empty($$MODEL_NAME_CAMEL$))
+		{
+			Flash::error('$MODEL_NAME$ não encontrado');
+
+			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
+		}
+
+		$this->$MODEL_NAME_CAMEL->delete($id);
+
+		Flash::success('$MODEL_NAME$ apagado(a) com sucesso.');
+
+		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
+	}
+}

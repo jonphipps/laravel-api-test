@@ -1,0 +1,4 @@
+<!-- $FIELD_NAME_TITLE$ Field -->
+<div class="col-md-12">
+    $FIELD_INPUT$
+</div>
