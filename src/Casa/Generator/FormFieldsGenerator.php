@@ -262,7 +262,7 @@ class FormFieldsGenerator
         $textField ='';
         $validatorInput = self::getInputValidators($field);
         //Form::select2Field('Select2 Async Multiple', 'select2-async-multiple', [], [2, 3], ['select2' => ['ajax--url' => '/select2/data'], 'multiple' => true])
-        $textField .= "\n\t{!! Form::select2Field('\$FIELD_NAME\$','\$FIELD_NAME\$', \$INPUT_ARR\$, [$\$MODEL_NAME\$->\$FIELD_NAME\$] , ['select2' => ['ajax--url' => '\$URL_DATA\$'], " . $validatorInput . "'class' => 'form-control js-data-example-ajax']) !!}";
+        $textField .= "\n\t{!! Form::select2Field('\$FIELD_NAME\$','\$FIELD_NAME\$', \$INPUT_ARR\$, isset(\$MODEL_NAME\$) ? [$\$MODEL_NAME\$->\$FIELD_NAME\$]: null , ['select2' => ['ajax--url' => '\$URL_DATA\$'], " . $validatorInput . "'class' => 'form-control js-data-example-ajax']) !!}";
 
         $textField = str_replace('$FIELD_NAME$', $field['fieldName'], $textField);
         $textField = str_replace('$MODEL_NAME$', Str::singular(Str::lower($modelName)), $textField);
