@@ -83,7 +83,8 @@ class ViewGenerator implements GeneratorProvider
                     break;
                 case 'select':
                     if ($this->commandData->fromTable){
-                        $fieldsStr .= FormFieldsGenerator::select2($fieldTemplate, $field, false)."\n\n";
+                        $modelName = Str::lower(Str::singular($this->commandData->modelName));
+                        $fieldsStr .= FormFieldsGenerator::select2($fieldTemplate, $field, false, $modelName)."\n\n";
                     }
 
                     else
@@ -93,9 +94,7 @@ class ViewGenerator implements GeneratorProvider
         }
 
         $templateData = $this->commandData->templatesHelper->getTemplate('fields.blade', $this->viewsPath);
-
         $templateData = str_replace('$FIELDS$', $fieldsStr, $templateData);
-
         $fileName = 'fields.blade.php';
 
         $path = $this->path.$fileName;
