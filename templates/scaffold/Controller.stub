@@ -19,6 +19,12 @@ class $MODEL_NAME$Controller extends AppBaseController
 	use Select2ableTrait;
 
 	/**
+	 * @var $MODEL_NAME$Service
+	 */
+	private $service;
+
+
+	/**
 	 * @return \Illuminate\Database\Eloquent\Builder
 	 */
 	protected function getQuery()
@@ -35,10 +41,11 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	private $htmlBuilder;
 
-	function __construct($MODEL_NAME$Repository $$MODEL_NAME_CAMEL$Repo)
+	function __construct($MODEL_NAME$Repository $$MODEL_NAME_CAMEL$Repo, $MODEL_NAME$Service $service)
 	{
 		$this->displayAttribute = '$DISPLAY_ATTRIBUTE$';
 		$this->repo = $$MODEL_NAME_CAMEL$Repo;
+		$this->service = $service;
 
 	}
 
@@ -88,11 +95,8 @@ class $MODEL_NAME$Controller extends AppBaseController
 	public function store(Create$MODEL_NAME$Request $request)
 	{
 		$input = $request->all();
-
-		$$MODEL_NAME_CAMEL$ = $this->repo->create($input);
-
+		$$MODEL_NAME_CAMEL$ = $this->service->save($input);
 		Flash::success('$MODEL_NAME$ salvo com sucesso.');
-
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}
 
@@ -105,15 +109,12 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function show($id)
 	{
-		$$MODEL_NAME_CAMEL$ = $this->repo->find($id);
-
+		$$MODEL_NAME_CAMEL$ = $this->service->find($id);
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
 			Flash::error('$MODEL_NAME$ não encontrado');
-
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
-
 		return view('$MODEL_NAME_PLURAL_CAMEL$.show')->with('$MODEL_NAME_CAMEL$', $$MODEL_NAME_CAMEL$);
 	}
 
@@ -126,15 +127,12 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function edit($id)
 	{
-		$$MODEL_NAME_CAMEL$ = $this->repo->find($id);
-
+		$$MODEL_NAME_CAMEL$ = $this->service->find($id);
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
 			Flash::error('$MODEL_NAME$ não encontrado');
-
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
-
 		return view('$MODEL_NAME_PLURAL_CAMEL$.edit')->with('$MODEL_NAME_CAMEL$', $$MODEL_NAME_CAMEL$);
 	}
 
@@ -148,18 +146,15 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function update($id, Update$MODEL_NAME$Request $request)
 	{
-		$$MODEL_NAME_CAMEL$ = $this->repo->find($id);
-
+		$$MODEL_NAME_CAMEL$ = $this->service->find($id);
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
-			Flash::error('$MODEL_NAME$ not found');
+			Flash::error('$MODEL_NAME$ não encontrado');
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 
-		$$MODEL_NAME_CAMEL$ = $this->repo->update($request->all(), $id);
-
+		$$MODEL_NAME_CAMEL$ = $this->service->update($request->all(), $id);
 		Flash::success('$MODEL_NAME$ atualizado com sucesso.');
-
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}
 
@@ -172,19 +167,9 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function destroy($id)
 	{
-		$$MODEL_NAME_CAMEL$ = $this->repo->find($id);
-
-		if(empty($$MODEL_NAME_CAMEL$))
-		{
-			Flash::error('$MODEL_NAME$ não encontrado');
-
-			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
-		}
-
-		$this->$MODEL_NAME_CAMEL->delete($id);
-
+		$this->service->delete($id);
 		Flash::success('$MODEL_NAME$ apagado(a) com sucesso.');
-
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}
 }
+
