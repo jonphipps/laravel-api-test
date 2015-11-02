@@ -1,5 +1,7 @@
 $FIELDS$
 <!-- Submit Field -->
 <div  class="form-actions right">
-        {!! Form::submit('Salvar', ['class' => 'btn green']) !!}
+	{!! Form::link('Cancelar', ['href'=>'/$MODEL_NAME_PLURAL_CAMEL$', 'class' => 'btn default']) !!}
+	{!! Form::reset('Limpar', ['class' => 'btn default']) !!}
+	{!! Form::submit('Salvar', ['class' => 'btn green']) !!}
 </div>
