@@ -1,4 +1,4 @@
-<?php namespace $NAMESPACE_REPOSITORY$;
+<?php namespace App\Services;
 
 use App\Repositories\$MODEL_NAME$Repository;
 class $MODEL_NAME$Service extends CrudService
