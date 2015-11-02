@@ -95,7 +95,10 @@ class ViewGenerator implements GeneratorProvider
 
         $templateData = $this->commandData->templatesHelper->getTemplate('fields.blade', $this->viewsPath);
         $templateData = str_replace('$FIELDS$', $fieldsStr, $templateData);
-        $fileName = 'fields.blade.php';
+        $templateData = str_replace('$MODEL_NAME_PLURAL_CAMEL$', $this->commandData->modelNamePluralCamel, $templateData);
+
+
+    $fileName = 'fields.blade.php';
 
         $path = $this->path.$fileName;
 
