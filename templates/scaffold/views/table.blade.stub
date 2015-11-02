@@ -2,7 +2,7 @@
                        <thead>
                            <tr>
                                 $FIELD_HEADERS$
-                                <th width="50px" ><i class="fa fa-edit"></i> Ações</th>
+                                <th width="80px" ><i class="fa fa-edit"></i> AÃ§Ãµes</th>
                            </tr>
                        </thead>
                    </table>
