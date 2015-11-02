@@ -1,33 +1,35 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container">
-    <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption">
-									<span class="caption-subject font-green-sharp bold uppercase">
-									$MODEL_NAME$ </span>
-                <span class="caption-helper"> atualizar</span>
+<div class="row">
+    <div class="col-md-12 col-sm-12>
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                                        <span class="caption-subject font-green-sharp bold uppercase">
+                                        $MODEL_NAME$ </span>
+                    <span class="caption-helper"> atualizar</span>
+                </div>
+                @include('common.crud-buttons')
             </div>
-            @include('common.crud-buttons')
-        </div>
-        <div class="portlet-body form">
-            <div class="tabbable">
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#tab_general" data-toggle="tab" aria-expanded="true">
-                            Geral </a>
-                    </li>
-                </ul>
-                <div class="tab-content no-space">
-                    <div class="tab-pane active" id="tab_general">
-                        <div class="form-body">
+            <div class="portlet-body form">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#tab_general" data-toggle="tab" aria-expanded="true">
+                                Geral </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content no-space">
+                        <div class="tab-pane active" id="tab_general">
+                            <div class="form-body">
 
-                            @include('common.errors')
+                                @include('common.errors')
 
-                            {!! Form::model($$MODEL_NAME_CAMEL$,  ['class' => 'form-horizontal form-row-seperated', 'route' => ['$MODEL_NAME_PLURAL_CAMEL$.update', $$MODEL_NAME_CAMEL$->id], 'method' => 'patch', 'id'=> 'form1']) !!}
+                                {!! Form::model($$MODEL_NAME_CAMEL$,  ['class' => 'form-horizontal form-row-seperated', 'route' => ['$MODEL_NAME_PLURAL_CAMEL$.update', $$MODEL_NAME_CAMEL$->id], 'method' => 'patch', 'id'=> 'form1']) !!}
 
-                            @include('$MODEL_NAME_PLURAL_CAMEL$.fields')
+                                @include('$MODEL_NAME_PLURAL_CAMEL$.fields')
+                            </div>
                         </div>
                     </div>
                 </div>
