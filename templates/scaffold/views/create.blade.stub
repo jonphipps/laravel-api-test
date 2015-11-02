@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="row">
-    <div class="col-md-12 col-sm-12>
+<div class="row content">
+    <div class="col-md-12 col-sm-12">
         <div class="portlet light">
             <div class="portlet-title">
                 <div class="caption">
