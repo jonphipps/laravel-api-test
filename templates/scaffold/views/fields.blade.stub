@@ -1,5 +1,5 @@
 $FIELDS$
 <!-- Submit Field -->
-<div class="form-group col-md-12" style="margin-left: 15px">
-    {!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
+<div  class="form-actions right">
+        {!! Form::submit('Salvar', ['class' => 'btn green']) !!}
 </div>

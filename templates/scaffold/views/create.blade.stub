@@ -15,7 +15,7 @@
                 <button class="btn green-haze btn-circle" onclick="document.getElementById('form1').submit();"><i class="fa fa-check" ></i> Salvar</button>
             </div>
         </div>
-        <div class="portlet-body">
+        <div class="portlet-body form">
             <div class="tabbable">
                 <ul class="nav nav-tabs">
                     <li class="active">

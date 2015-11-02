@@ -112,7 +112,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 		$$MODEL_NAME_CAMEL$ = $this->service->find($id);
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
-			Flash::error('$MODEL_NAME$ n„o encontrado');
+			Flash::error('$MODEL_NAME$ n√£o encontrado');
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 		return view('$MODEL_NAME_PLURAL_CAMEL$.show')->with('$MODEL_NAME_CAMEL$', $$MODEL_NAME_CAMEL$);
@@ -130,7 +130,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 		$$MODEL_NAME_CAMEL$ = $this->service->find($id);
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
-			Flash::error('$MODEL_NAME$ n„o encontrado');
+			Flash::error('$MODEL_NAME$ n√£o encontrado');
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 		return view('$MODEL_NAME_PLURAL_CAMEL$.edit')->with('$MODEL_NAME_CAMEL$', $$MODEL_NAME_CAMEL$);
@@ -149,7 +149,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 		$$MODEL_NAME_CAMEL$ = $this->service->find($id);
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
-			Flash::error('$MODEL_NAME$ n„o encontrado');
+			Flash::error('$MODEL_NAME$ n√£o encontrado');
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 
