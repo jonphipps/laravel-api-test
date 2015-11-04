@@ -18,7 +18,7 @@ class ValidatorGenerator implements GeneratorProvider
     public function __construct($commandData)
     {
         $this->commandData = $commandData;
-        $this->path = Config::get('generator.path_validator', app_path('Validator/'));
+        $this->path = Config::get('generator.path_validator', app_path('Validators/'));
     }
 
     public function generate()

@@ -37,7 +37,7 @@ class FormFieldsGenerator
 
         $validatorInput = self::getInputValidators($field);
         //Form::textField('Form::textField', 'textField')
-        $textField .= "\n\t{!! Form::textField('','\$FIELD_NAME\$', null, [" . $validatorInput . "'class' => 'form-control']) !!}";
+        $textField .= "\n\t{!! Form::textField('','\$FIELD_NAME\$', null, [" . $validatorInput . "'class' => '', 'placeholder' => '\$FIELD_NAME\$']) !!}";
 
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
@@ -52,7 +52,7 @@ class FormFieldsGenerator
 
         $validatorInput = self::getInputValidators($field);
 
-        $textareaField .= "\n\t{!! Form::textarea('\$FIELD_NAME\$', null, [" . $validatorInput . "'class' => 'form-control']) !!}";
+        $textareaField .= "\n\t{!! Form::textarea('\$FIELD_NAME\$', null, [" . $validatorInput . "'class' => '', 'placeholder' => '\$FIELD_NAME\$']) !!}";
 
         $templateData = str_replace('$FIELD_INPUT$', $textareaField, $templateData);
 
@@ -67,7 +67,7 @@ class FormFieldsGenerator
 
         $validatorInput = self::getInputValidators($field);
 
-        $textField .= "\n\t{!! Form::password('\$FIELD_NAME\$', [" . $validatorInput . "'class' => 'form-control']) !!}";
+        $textField .= "\n\t{!! Form::password('\$FIELD_NAME\$', [" . $validatorInput . "'class' => '']) !!}";
 
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
@@ -82,7 +82,7 @@ class FormFieldsGenerator
 
         $validatorInput = self::getInputValidators($field);
 
-        $textField .= "\n\t{!! Form::email('\$FIELD_NAME\$', null, [" . $validatorInput . "'class' => 'form-control']) !!}";
+        $textField .= "\n\t{!! Form::email('\$FIELD_NAME\$', null, [" . $validatorInput . "'class' => '', 'placeholder'=> '\$FIELD_NAME\$']) !!}";
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
         $templateData = self::replaceFieldVars($templateData, $field);
@@ -156,7 +156,7 @@ class FormFieldsGenerator
     {
         $textField = ''; //= self::generateLabel($field);
         //Form::numberField('Form::numberField', 'numberField')
-        $textField .= "\n\t{!! Form::numberField('','\$FIELD_NAME\$', null, ['class' => 'form-control']) !!}";
+        $textField .= "\n\t{!! Form::numberField('','\$FIELD_NAME\$', null, ['class' => '', 'placeholder' => '\$FIELD_NAME\$']) !!}";
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
         $templateData = self::replaceFieldVars($templateData, $field);
@@ -168,7 +168,7 @@ class FormFieldsGenerator
     {
         $textField = self::generateLabel($field);
 
-        $textField .= "\n\t{!! Form::date('\$FIELD_NAME\$', null, ['class' => 'form-control form-control-inline input-medium date-picker']) !!}";
+        $textField .= "\n\t{!! Form::date('\$FIELD_NAME\$', null, ['class' => ' form-control-inline input-medium date-picker']) !!}";
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
         $templateData = self::replaceFieldVars($templateData, $field);
@@ -182,7 +182,7 @@ class FormFieldsGenerator
         //Form::dateField('Date', 'date')
 
         $textField = '';
-        $textField .= "\n\t{!! Form::dateField('','\$FIELD_NAME\$', null, ['datetime' => ['locale' => 'pt'],'class' => 'form-control date-picker']) !!}";
+        $textField .= "\n\t{!! Form::dateField('','\$FIELD_NAME\$', null, ['datetime' => ['locale' => 'pt'],'class' => ' date-picker', 'placeholder' => '\$FIELD_NAME\$']) !!}";
         $templateData = str_replace('$FIELD_INPUT$', $textField, $templateData);
 
         $templateData = self::replaceFieldVars($templateData, $field);
@@ -196,7 +196,7 @@ class FormFieldsGenerator
 
         $validatorInput = self::getInputValidators($field);
         //Form::select2Field('Select2 Async Multiple', 'select2-async-multiple', [], [2, 3], ['select2' => ['ajax--url' => '/select2/data'], 'multiple' => true])
-        $textField .= "\n\t{!! Form::select2Field('\$FIELD_NAME\$','select2-async-multiple', \$INPUT_ARR\$, null, ['select2' => ['ajax--url' => '$URL_DATA$' " . $validatorInput . "'class' => 'form-control js-data-example-ajax']) !!}";
+        $textField .= "\n\t{!! Form::select2Field('\$FIELD_NAME\$','select2-async-multiple', \$INPUT_ARR\$, null, ['select2' => ['ajax--url' => '$URL_DATA$' " . $validatorInput . "'class' => ' js-data-example-ajax']) !!}";
         $textField = str_replace('$FIELD_NAME$', $field['fieldName'], $textField);
 
         //If options will be an array
@@ -262,7 +262,7 @@ class FormFieldsGenerator
         $textField ='';
         $validatorInput = self::getInputValidators($field);
         //Form::select2Field('Select2 Async Multiple', 'select2-async-multiple', [], [2, 3], ['select2' => ['ajax--url' => '/select2/data'], 'multiple' => true])
-        $textField .= "\n\t{!! Form::select2Field('\$FIELD_NAME\$','\$FIELD_NAME\$', \$INPUT_ARR\$, isset($\$MODEL_NAME\$) ? [$\$MODEL_NAME\$->\$FIELD_NAME\$]: null , ['select2' => ['ajax--url' => '\$URL_DATA\$'], " . $validatorInput . "'class' => 'form-control js-data-example-ajax']) !!}";
+        $textField .= "\n\t{!! Form::select2Field('\$FIELD_NAME\$','\$FIELD_NAME\$', \$INPUT_ARR\$, isset($\$MODEL_NAME\$) ? [$\$MODEL_NAME\$->\$FIELD_NAME\$]: null , ['select2' => ['ajax--url' => '\$URL_DATA\$'], " . $validatorInput . "'class' => 'js-data-example-ajax', 'placeholder' => '\$FIELD_NAME\$']) !!}";
 
         $textField = str_replace('$FIELD_NAME$', $field['fieldName'], $textField);
         $textField = str_replace('$MODEL_NAME$', Str::singular(Str::lower($modelName)), $textField);
