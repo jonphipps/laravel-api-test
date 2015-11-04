@@ -105,7 +105,6 @@ class ModelGenerator implements GeneratorProvider
         return $code;
 
     }
-
     private function generateRules()
     {
         $rules = [];

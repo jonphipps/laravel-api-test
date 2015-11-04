@@ -8,7 +8,7 @@ Route::get('$MODEL_NAME_PLURAL_CAMEL$/select2search', ['as' => '$MODEL_NAME_PLUR
 'uses' => '$MODEL_NAME$Controller@select2search',
 ]);
 
-Route::get('$MODEL_NAME_PLURAL_CAMEL$/init', ['as' => '$MODEL_NAME_PLURAL_CAMEL$.select2searchInit',
+Route::get('$MODEL_NAME_PLURAL_CAMEL$/select2search/init', ['as' => '$MODEL_NAME_PLURAL_CAMEL$.select2searchInit',
 'uses' => '$MODEL_NAME$Controller@select2searchInit',
 ]);
 

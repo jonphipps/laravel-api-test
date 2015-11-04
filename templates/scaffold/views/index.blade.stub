@@ -67,7 +67,7 @@
 
 				   @include('flash::message')
 
-				   <div class="portlet-body">
+				   <div class="portlet-body form">
 
 				       @include('$MODEL_NAME_PLURAL_CAMEL$.table')
 
