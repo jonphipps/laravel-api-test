@@ -52,6 +52,7 @@ class ModelGenerator implements GeneratorProvider
             $templateData = str_replace('$SOFT_DELETE$', '', $templateData);
             $templateData = str_replace('$SOFT_DELETE_DATES$', '', $templateData);
         }
+        $templateData = str_replace('$RELATIONS$', $this->generateRelations(), $templateData);
 
         $templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
 
@@ -67,7 +68,6 @@ class ModelGenerator implements GeneratorProvider
 
         $templateData = str_replace('$CAST$', implode(",\n\t\t", $this->generateCasts()), $templateData);
 
-        $templateData = str_replace('$RELATIONS$', $this->generateRelations(), $templateData);
 
         $templateData = str_replace('$DISPLAY_ATTRIBUTE$', $this->getDisplayAttr(), $templateData);
 
