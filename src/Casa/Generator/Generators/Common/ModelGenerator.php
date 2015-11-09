@@ -98,7 +98,7 @@ class ModelGenerator implements GeneratorProvider
         foreach($relations as $r)
         {
             $code .= "\tpublic function " . Str::plural($r->TABLE_NAME) ."() {\n";
-            $code .= "\t\t" . '$this->hasMany(' .  "'" . ucfirst(Str::camel(StringUtils::singularize($r->TABLE_NAME))) ."', '". $r->COLUMN_NAME . "'); \n";
+            $code .= "\t\t" . 'return $this->hasMany(' .  "'\$NAMESPACE_MODEL\$\\" . ucfirst(Str::camel(StringUtils::singularize($r->TABLE_NAME))) ."', '". $r->COLUMN_NAME . "'); \n";
             $code .= "\t}\n\n";
         }
 
