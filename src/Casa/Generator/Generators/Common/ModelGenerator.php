@@ -52,6 +52,7 @@ class ModelGenerator implements GeneratorProvider
             $templateData = str_replace('$SOFT_DELETE$', '', $templateData);
             $templateData = str_replace('$SOFT_DELETE_DATES$', '', $templateData);
         }
+        $templateData = str_replace('$RELATIONS$', $this->generateRelations(), $templateData);
 
         $templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
 
@@ -67,7 +68,6 @@ class ModelGenerator implements GeneratorProvider
 
         $templateData = str_replace('$CAST$', implode(",\n\t\t", $this->generateCasts()), $templateData);
 
-        $templateData = str_replace('$RELATIONS$', $this->generateRelations(), $templateData);
 
         $templateData = str_replace('$DISPLAY_ATTRIBUTE$', $this->getDisplayAttr(), $templateData);
 
@@ -89,7 +89,7 @@ class ModelGenerator implements GeneratorProvider
         foreach($relations as $r)
         {
             $code .= "\tpublic function " . StringUtils::singularize($r->REFERENCED_TABLE_NAME) ."() {\n";
-            $code .= "\t\t" . '$this->belongsTo(' .  "'" . ucfirst(Str::camel(StringUtils::singularize($r->REFERENCED_TABLE_NAME))) ."', '". $r->COLUMN_NAME . "'); \n";
+            $code .= "\t\t" . 'return $this->belongsTo(' .  "'\$NAMESPACE_MODEL\$\\" . ucfirst(Str::camel(StringUtils::singularize($r->REFERENCED_TABLE_NAME))) ."', '". $r->COLUMN_NAME . "'); \n";
             $code .= "\t}\n\n";
         }
 
@@ -98,7 +98,7 @@ class ModelGenerator implements GeneratorProvider
         foreach($relations as $r)
         {
             $code .= "\tpublic function " . Str::plural($r->TABLE_NAME) ."() {\n";
-            $code .= "\t\t" . '$this->hasMany(' .  "'" . ucfirst(Str::camel(StringUtils::singularize($r->TABLE_NAME))) ."', '". $r->COLUMN_NAME . "'); \n";
+            $code .= "\t\t" . 'return $this->hasMany(' .  "'\$NAMESPACE_MODEL\$\\" . ucfirst(Str::camel(StringUtils::singularize($r->TABLE_NAME))) ."', '". $r->COLUMN_NAME . "'); \n";
             $code .= "\t}\n\n";
         }
 
