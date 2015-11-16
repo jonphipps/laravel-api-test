@@ -51,6 +51,8 @@ class DataBaseHelper
             /** @var \Doctrine\DBAL\Schema\AbstractSchemaManager  */
             $schema = DB::getDoctrineSchemaManager($tableName);
 
+            $schema->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
+
             /** @var \Doctrine\DBAL\Schema\Table  */
             $table = $schema->listTableDetails($tableName);
 
