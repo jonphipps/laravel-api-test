@@ -19,23 +19,23 @@ class AppBaseController extends AppBaseController
     public function validateRequestOrFail($request, array $rules, $messages = [], $customAttributes = [])
     {
         $validator = $this->getValidationFactory()->make($request->all(), $rules, $messages, $customAttributes);
-	    
+
         if ($validator->fails())
         {
-	        throw new HttpException(400, $validator->errors()->getMessages());
+            throw new HttpException(400, $validator->errors()->getMessages());
         }
     }
 
-	public function makeResponse($result, $message)
-	{
-		return [
-			'data' => $result,
-			'message' => $message
-		];
-	}
+    public function makeResponse($result, $message)
+    {
+        return [
+            'data' => $result,
+            'message' => $message
+        ];
+    }
 
-	public function sendResponse($result, $message)
-	{
-		return Response::json($this->makeResponse($result, $message));
-	}
+    public function sendResponse($result, $message)
+    {
+        return Response::json($this->makeResponse($result, $message));
+    }
 }
