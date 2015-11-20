@@ -150,7 +150,7 @@ class CommandData
 
             '$NAMESPACE_REPOSITORY$'     => Config::get('generator.namespace_repository', 'App\Repositories'),
 
-            '$NAMESPACE_MODEL$'          => Config::get('generator.namespace_model', 'App\Models'),
+            '$NAMESPACE_MODEL$'          => Config::get('generator.namespace_model', 'App\Entities'),
 
             '$NAMESPACE_MODEL_EXTEND$'   => Config::get('generator.model_extend_class', 'Illuminate\Database\Eloquent\Model'),
 
