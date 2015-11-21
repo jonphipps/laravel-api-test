@@ -8,12 +8,12 @@
                 <div class="caption">
                     <span class="caption-subject font-green-sharp bold uppercase">
                         $MODEL_NAME$ </span>
-                    <span class="caption-helper"> inserir novo registro</span>
+                    <span class="caption-helper"> insert new record</span>
                 </div>
                 <div class="actions btn-set">
-                    <button type="button" name="back" class="btn btn-default btn-circle" onclick="history.back();"><i class="fa fa-angle-left"></i> Voltar</button>
-                    <button class="btn btn-default btn-circle" onclick="document.getElementById('form1').reset();><i class="fa fa-reply"></i> Resetar</button>
-                    <button class="btn green-haze btn-circle" onclick="document.getElementById('form1').submit();"><i class="fa fa-check" ></i> Salvar</button>
+                    <button type="button" name="back" class="btn btn-default btn-circle" onclick="history.back();"><i class="fa fa-angle-left"></i> Go back</button>
+                    <button class="btn btn-default btn-circle" onclick="document.getElementById('form1').reset();><i class="fa fa-reply"></i> Reset</button>
+                    <button class="btn green-haze btn-circle" onclick="document.getElementById('form1').submit();"><i class="fa fa-check" ></i> Save</button>
                 </div>
             </div>
             <div class="portlet-body form">
@@ -21,7 +21,7 @@
                     <ul class="nav nav-tabs">
                         <li class="active">
                             <a href="#tab_general" data-toggle="tab" aria-expanded="true">
-                                Geral </a>
+                                General </a>
                         </li>
                     </ul>
                     <div class="tab-content no-space">
