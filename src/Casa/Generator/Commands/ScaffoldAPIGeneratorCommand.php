@@ -4,11 +4,14 @@ namespace Casa\Generator\Commands;
 
 use Casa\Generator\CommandData;
 use Casa\Generator\Generators\API\APIControllerGenerator;
+use Casa\Generator\Generators\Common\InterfaceGenerator;
 use Casa\Generator\Generators\Common\MigrationGenerator;
 use Casa\Generator\Generators\Common\ModelGenerator;
 use Casa\Generator\Generators\Common\RepositoryGenerator;
 use Casa\Generator\Generators\Common\RequestGenerator;
 use Casa\Generator\Generators\Common\RoutesGenerator;
+use Casa\Generator\Generators\Common\ServiceGenerator;
+use Casa\Generator\Generators\Common\ValidatorGenerator;
 use Casa\Generator\Generators\Scaffold\ViewControllerGenerator;
 use Casa\Generator\Generators\Scaffold\ViewGenerator;
 
@@ -56,8 +59,17 @@ class ScaffoldAPIGeneratorCommand extends BaseCommand
         $requestGenerator = new RequestGenerator($this->commandData);
         $requestGenerator->generate();
 
+        $interfaceGenerator = new InterfaceGenerator($this->commandData);
+        $interfaceGenerator->generate();
+
         $repositoryGenerator = new RepositoryGenerator($this->commandData);
         $repositoryGenerator->generate();
+
+        $serviceGenerator = new ServiceGenerator($this->commandData);
+        $serviceGenerator->generate();
+
+        $validatorGenerator = new ValidatorGenerator($this->commandData);
+        $validatorGenerator->generate();
 
         $repoControllerGenerator = new APIControllerGenerator($this->commandData);
         $repoControllerGenerator->generate();
