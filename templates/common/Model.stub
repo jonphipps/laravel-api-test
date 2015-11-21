@@ -1,14 +1,17 @@
 <?php namespace $NAMESPACE_MODEL$;
 
 use $NAMESPACE_MODEL_EXTEND$ as Model;
+use Prettus\Repository\Contracts    ransformable;
+use Prettus\Repository    raits    ransformableTrait;
 $SOFT_DELETE_IMPORT$
-class $MODEL_NAME$ extends Model
+class $MODEL_NAME$ extends Model implements Transformable
 {
     $SOFT_DELETE$
-    public $table = "$TABLE_NAME$";
+    use TransformableTrait;
+    protected $table = "$TABLE_NAME$";
     $SOFT_DELETE_DATES$
 
-    public $fillable = [
+    protected $fillable = [
         $FIELDS$
     ];
 
