@@ -86,7 +86,7 @@ class $MODEL_NAME$APIController extends AppBaseController
     public function edit($id)
     {
         // maybe, you can return a template for JS
-//		Errors::throwHttpExceptionWithCode(Errors::EDITION_FORM_NOT_EXISTS, ['id' => $id], static::getHATEOAS(['%id' => $id]));
+//        Errors::throwHttpExceptionWithCode(Errors::EDITION_FORM_NOT_EXISTS, ['id' => $id], static::getHATEOAS(['%id' => $id]));
     }
 
     /**

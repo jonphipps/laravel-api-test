@@ -96,7 +96,7 @@ class $MODEL_NAME$Controller extends AppBaseController
     {
         $input = $request->all();
         $$MODEL_NAME_CAMEL$ = $this->service->save($input);
-		Flash::success('$MODEL_NAME$ saved successfully.');
+        Flash::success('$MODEL_NAME$ saved successfully.');
         return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
     }
 
@@ -112,7 +112,7 @@ class $MODEL_NAME$Controller extends AppBaseController
         $$MODEL_NAME_CAMEL$ = $this->service->find($id);
         if(empty($$MODEL_NAME_CAMEL$))
         {
-			Flash::error('$MODEL_NAME$ not found');
+            Flash::error('$MODEL_NAME$ not found');
             return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
         }
         return view('$MODEL_NAME_PLURAL_CAMEL$.show')->with('$MODEL_NAME_CAMEL$', $$MODEL_NAME_CAMEL$);
@@ -130,7 +130,7 @@ class $MODEL_NAME$Controller extends AppBaseController
         $$MODEL_NAME_CAMEL$ = $this->service->find($id);
         if(empty($$MODEL_NAME_CAMEL$))
         {
-			Flash::error('$MODEL_NAME$ not found');
+            Flash::error('$MODEL_NAME$ not found');
             return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
         }
         return view('$MODEL_NAME_PLURAL_CAMEL$.edit')->with('$MODEL_NAME_CAMEL$', $$MODEL_NAME_CAMEL$);
@@ -149,12 +149,12 @@ class $MODEL_NAME$Controller extends AppBaseController
         $$MODEL_NAME_CAMEL$ = $this->service->find($id);
         if(empty($$MODEL_NAME_CAMEL$))
         {
-			Flash::error('$MODEL_NAME$ not found');
+            Flash::error('$MODEL_NAME$ not found');
             return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
         }
 
         $$MODEL_NAME_CAMEL$ = $this->service->update($request->all(), $id);
-		Flash::success('$MODEL_NAME$ updated successfully.');
+        Flash::success('$MODEL_NAME$ updated successfully.');
         return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
     }
 
@@ -168,7 +168,7 @@ class $MODEL_NAME$Controller extends AppBaseController
     public function destroy($id)
     {
         $this->service->delete($id);
-		Flash::success('$MODEL_NAME$ deleted successfully.');
+        Flash::success('$MODEL_NAME$ deleted successfully.');
         return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
     }
 }
