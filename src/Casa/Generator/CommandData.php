@@ -154,7 +154,7 @@ class CommandData
 
             '$NAMESPACE_MODEL_EXTEND$'   => Config::get('generator.model_extend_class', 'Illuminate\Database\Eloquent\Model'),
 
-            '$SOFT_DELETE_DATES$'        => "\n\tprotected \$dates = ['deleted_at'];\n",
+            '$SOFT_DELETE_DATES$'        => "\n    protected \$dates = ['deleted_at'];\n",
 
             '$SOFT_DELETE$'              => "use SoftDeletes;\n",
 

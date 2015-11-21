@@ -16,7 +16,7 @@ class SchemaGenerator
 
         $fieldType = array_shift($fieldTypeInputs);
 
-        $fieldStr = "\t\t\t\$table->".$fieldType."('".$fieldName."'";
+        $fieldStr = "            \$table->".$fieldType."('".$fieldName."'";
 
         if (count($fieldTypeInputs) > 0) {
             foreach ($fieldTypeInputs as $param) {

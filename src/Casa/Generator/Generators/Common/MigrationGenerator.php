@@ -48,13 +48,13 @@ class MigrationGenerator implements GeneratorProvider
         }
 
         if ($this->commandData->rememberToken) {
-            $fieldsStr .= "\t\t\t\$table->rememberToken();\n";
+            $fieldsStr .= "            \$table->rememberToken();\n";
         }
 
-        $fieldsStr .= "\t\t\t\$table->timestamps();";
+        $fieldsStr .= "            \$table->timestamps();";
 
         if ($this->commandData->useSoftDelete) {
-            $fieldsStr .= "\n\t\t\t\$table->softDeletes();";
+            $fieldsStr .= "\n            \$table->softDeletes();";
         }
 
         return $fieldsStr;

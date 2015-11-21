@@ -62,11 +62,11 @@ class ModelGenerator implements GeneratorProvider
             $fillables[] = '"'.$field['fieldName'].'"';
         }
 
-        $templateData = str_replace('$FIELDS$', implode(",\n\t\t", $fillables), $templateData);
+        $templateData = str_replace('$FIELDS$', implode(",\n        ", $fillables), $templateData);
 
-        $templateData = str_replace('$RULES$', implode(",\n\t\t", $this->generateRules()), $templateData);
+        $templateData = str_replace('$RULES$', implode(",\n        ", $this->generateRules()), $templateData);
 
-        $templateData = str_replace('$CAST$', implode(",\n\t\t", $this->generateCasts()), $templateData);
+        $templateData = str_replace('$CAST$', implode(",\n        ", $this->generateCasts()), $templateData);
 
 
         $templateData = str_replace('$DISPLAY_ATTRIBUTE$', $this->getDisplayAttr(), $templateData);
@@ -88,18 +88,18 @@ class ModelGenerator implements GeneratorProvider
         $relations = DataBaseHelper::getForeignKeysFromTable($this->commandData->tableName);
         foreach($relations as $r)
         {
-            $code .= "\tpublic function " . StringUtils::singularize($r->REFERENCED_TABLE_NAME) ."() {\n";
-            $code .= "\t\t" . 'return $this->belongsTo(' .  "'\$NAMESPACE_MODEL\$\\" . ucfirst(Str::camel(StringUtils::singularize($r->REFERENCED_TABLE_NAME))) ."', '". $r->COLUMN_NAME . "'); \n";
-            $code .= "\t}\n\n";
+            $code .= "    public function " . StringUtils::singularize($r->REFERENCED_TABLE_NAME) ."() {\n";
+            $code .= "        " . 'return $this->belongsTo(' .  "'\$NAMESPACE_MODEL\$\\" . ucfirst(Str::camel(StringUtils::singularize($r->REFERENCED_TABLE_NAME))) ."', '". $r->COLUMN_NAME . "'); \n";
+            $code .= "    }\n\n";
         }
 
         //Get what tables it is referended
         $relations = DataBaseHelper::getReferencesFromTable($this->commandData->tableName);
         foreach($relations as $r)
         {
-            $code .= "\tpublic function " . Str::plural($r->TABLE_NAME) ."() {\n";
-            $code .= "\t\t" . 'return $this->hasMany(' .  "'\$NAMESPACE_MODEL\$\\" . ucfirst(Str::camel(StringUtils::singularize($r->TABLE_NAME))) ."', '". $r->COLUMN_NAME . "'); \n";
-            $code .= "\t}\n\n";
+            $code .= "    public function " . Str::plural($r->TABLE_NAME) ."() {\n";
+            $code .= "        " . 'return $this->hasMany(' .  "'\$NAMESPACE_MODEL\$\\" . ucfirst(Str::camel(StringUtils::singularize($r->TABLE_NAME))) ."', '". $r->COLUMN_NAME . "'); \n";
+            $code .= "    }\n\n";
         }
 
         return $code;

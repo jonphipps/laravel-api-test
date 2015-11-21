@@ -25,7 +25,7 @@ class ValidatorGenerator implements GeneratorProvider
     {
         $templateData = $this->commandData->templatesHelper->getTemplate('Validator', 'common');
 
-        $templateData = str_replace('$RULES$', implode(",\n\t\t", $this->generateRules()), $templateData);
+        $templateData = str_replace('$RULES$', implode(",\n        ", $this->generateRules()), $templateData);
 
         $templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
 
