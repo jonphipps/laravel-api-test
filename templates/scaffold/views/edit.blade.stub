@@ -8,7 +8,7 @@
                 <div class="caption">
                                         <span class="caption-subject font-green-sharp bold uppercase">
                                         $MODEL_NAME$ </span>
-                    <span class="caption-helper"> atualizar</span>
+                    <span class="caption-helper"> update</span>
                 </div>
                 @include('common.crud-buttons')
             </div>
@@ -17,7 +17,7 @@
                     <ul class="nav nav-tabs">
                         <li class="active">
                             <a href="#tab_general" data-toggle="tab" aria-expanded="true">
-                                Geral </a>
+                                General </a>
                         </li>
                     </ul>
                     <div class="tab-content no-space">
