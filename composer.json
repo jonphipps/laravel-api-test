@@ -18,6 +18,10 @@
         {
             "name": "Julio Alves",
             "email": "julio.cesar.alves@gmail.com"
+        },
+        {
+            "name": "Jon Phipps",
+            "email": "jonphipps@gmail.com"
         }
     ],
     "require": {
