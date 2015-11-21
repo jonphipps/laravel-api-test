@@ -5,6 +5,7 @@ namespace Casa\Generator\Generators\Common;
 use Casa\Generator\Utils\DataBaseHelper;
 use Casa\Generator\Utils\StringUtils;
 use Config;
+use DB;
 use Casa\Generator\CommandData;
 use Casa\Generator\Generators\GeneratorProvider;
 use Casa\Generator\Utils\GeneratorUtils;
@@ -18,10 +19,14 @@ class ModelGenerator implements GeneratorProvider
     /** @var string */
     private $path;
 
+    /** @var  string */
+    private $prefix;
+
     public function __construct($commandData)
     {
         $this->commandData = $commandData;
         $this->path = Config::get('generator.path_model', app_path('Entities/'));
+        $this->prefix = DB::getConfig('prefix');
     }
 
     public function generate()
@@ -88,17 +93,21 @@ class ModelGenerator implements GeneratorProvider
         $relations = DataBaseHelper::getForeignKeysFromTable($this->commandData->tableName);
         foreach($relations as $r)
         {
-            $code .= "    public function " . StringUtils::singularize($r->REFERENCED_TABLE_NAME) ."() {\n";
-            $code .= "        " . 'return $this->belongsTo(' .  "'\$NAMESPACE_MODEL\$\\" . ucfirst(Str::camel(StringUtils::singularize($r->REFERENCED_TABLE_NAME))) ."', '". $r->COLUMN_NAME . "'); \n";
+            $referencedTableName = preg_replace("/$this->prefix/uis", '', $r->REFERENCED_TABLE_NAME);
+
+            $code .= "    public function " . StringUtils::singularize($referencedTableName) ."() {\n";
+            $code .= "        " . 'return $this->belongsTo(' .  "'\$NAMESPACE_MODEL\$\\" . ucfirst(Str::camel(StringUtils::singularize($referencedTableName))) ."', '". $r->COLUMN_NAME . "'); \n";
             $code .= "    }\n\n";
         }
 
-        //Get what tables it is referended
+        //Get what tables it is referenced
         $relations = DataBaseHelper::getReferencesFromTable($this->commandData->tableName);
         foreach($relations as $r)
         {
-            $code .= "    public function " . Str::plural($r->TABLE_NAME) ."() {\n";
-            $code .= "        " . 'return $this->hasMany(' .  "'\$NAMESPACE_MODEL\$\\" . ucfirst(Str::camel(StringUtils::singularize($r->TABLE_NAME))) ."', '". $r->COLUMN_NAME . "'); \n";
+            $tableName = preg_replace("/$this->prefix/uis", '', $r->TABLE_NAME);
+
+            $code .= "    public function " . Str::plural($tableName) ."() {\n";
+            $code .= "        " . 'return $this->hasMany(' .  "'\$NAMESPACE_MODEL\$\\" . ucfirst(Str::camel(StringUtils::singularize($tableName))) ."', '". $r->COLUMN_NAME . "'); \n";
             $code .= "    }\n\n";
         }
 
