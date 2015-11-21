@@ -94,9 +94,10 @@ class ModelGenerator implements GeneratorProvider
         foreach($relations as $r)
         {
             $referencedTableName = preg_replace("/$this->prefix/uis", '', $r->REFERENCED_TABLE_NAME);
+            $referencedTableName = ucfirst(Str::camel(StringUtils::singularize($referencedTableName)));
 
-            $code .= "    public function " . StringUtils::singularize($referencedTableName) ."() {\n";
-            $code .= "        " . 'return $this->belongsTo(' .  "'\$NAMESPACE_MODEL\$\\" . ucfirst(Str::camel(StringUtils::singularize($referencedTableName))) ."', '". $r->COLUMN_NAME . "'); \n";
+            $code .= "    public function " . $referencedTableName ."() {\n";
+            $code .= "        " . 'return $this->belongsTo(' .  "'\$NAMESPACE_MODEL\$\\" . $referencedTableName ."', '". $r->COLUMN_NAME . "'); \n";
             $code .= "    }\n\n";
         }
 
@@ -105,9 +106,10 @@ class ModelGenerator implements GeneratorProvider
         foreach($relations as $r)
         {
             $tableName = preg_replace("/$this->prefix/uis", '', $r->TABLE_NAME);
+            $tableName = ucfirst(Str::camel(StringUtils::singularize($tableName)));
 
             $code .= "    public function " . Str::plural($tableName) ."() {\n";
-            $code .= "        " . 'return $this->hasMany(' .  "'\$NAMESPACE_MODEL\$\\" . ucfirst(Str::camel(StringUtils::singularize($tableName))) ."', '". $r->COLUMN_NAME . "'); \n";
+            $code .= "        " . 'return $this->hasMany(' .  "'\$NAMESPACE_MODEL\$\\" . $tableName ."', '". $r->COLUMN_NAME . "'); \n";
             $code .= "    }\n\n";
         }
 

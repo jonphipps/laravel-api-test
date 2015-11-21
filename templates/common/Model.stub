@@ -1,8 +1,8 @@
 <?php namespace $NAMESPACE_MODEL$;
 
 use $NAMESPACE_MODEL_EXTEND$ as Model;
-use Prettus\Repository\Contracts    ransformable;
-use Prettus\Repository    raits    ransformableTrait;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 $SOFT_DELETE_IMPORT$
 class $MODEL_NAME$ extends Model implements Transformable
 {
@@ -10,7 +10,6 @@ class $MODEL_NAME$ extends Model implements Transformable
     use TransformableTrait;
     protected $table = "$TABLE_NAME$";
     $SOFT_DELETE_DATES$
-
     protected $fillable = [
         $FIELDS$
     ];
