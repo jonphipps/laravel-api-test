@@ -30,9 +30,9 @@ return [
 
     'path_repository'          => app_path('Repositories/'),
 
-    'path_service'          => app_path('Services/'),
+    'path_service'             => app_path('Services/'),
 
-    'path_validator'          => app_path('Validators/'),
+    'path_validator'           => app_path('Validators/'),
 
     'path_controller'          => app_path('Http/Controllers/'),
 
