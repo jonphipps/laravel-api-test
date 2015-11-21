@@ -28,7 +28,7 @@ The artisan command can generate the following items:
 
 And your simple CRUD and APIs are ready in mere seconds.
 
-Here is the full documentation.
+Here is the full documentation:
 
 [Upgrade Guide](https://github.com/mitulgolakiya/laravel-api-generator/blob/master/Upgrade_Guide.md).
 
