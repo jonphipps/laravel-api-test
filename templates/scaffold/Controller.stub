@@ -7,7 +7,6 @@ use $NAMESPACE_REPOSITORY$\$MODEL_NAME$Repository;
 use Flash;
 use $BASE_CONTROLLER$ as AppBaseController;
 use Response;
-use App\Services\$MODEL_NAME$Service;
 use Illuminate\Http\Request;
 use yajra\Datatables\Datatables;
 use yajra\Datatables\Html\Builder;
@@ -17,11 +16,6 @@ use $NAMESPACE_MODEL$\$MODEL_NAME$;
 class $MODEL_NAME$Controller extends AppBaseController
 {
     use Select2ableTrait;
-
-    /**
-     * @var $MODEL_NAME$Service
-     */
-    private $service;
 
 
     /**
@@ -41,12 +35,10 @@ class $MODEL_NAME$Controller extends AppBaseController
      */
     private $htmlBuilder;
 
-    function __construct($MODEL_NAME$Repository $$MODEL_NAME_CAMEL$Repo, $MODEL_NAME$Service $service)
+    function __construct($MODEL_NAME$Repository $$MODEL_NAME_CAMEL$Repo)
     {
         $this->displayAttribute = '$DISPLAY_ATTRIBUTE$';
         $this->repo = $$MODEL_NAME_CAMEL$Repo;
-        $this->service = $service;
-
     }
 
     /**
@@ -95,7 +87,7 @@ class $MODEL_NAME$Controller extends AppBaseController
     public function store(Create$MODEL_NAME$Request $request)
     {
         $input = $request->all();
-        $$MODEL_NAME_CAMEL$ = $this->service->save($input);
+        $$MODEL_NAME_CAMEL$ = $this->repo->create($input);
         Flash::success('$MODEL_NAME$ saved successfully.');
         return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
     }
@@ -109,7 +101,7 @@ class $MODEL_NAME$Controller extends AppBaseController
      */
     public function show($id)
     {
-        $$MODEL_NAME_CAMEL$ = $this->service->find($id);
+        $$MODEL_NAME_CAMEL$ = $this->repo->find($id);
         if(empty($$MODEL_NAME_CAMEL$))
         {
             Flash::error('$MODEL_NAME$ not found');
@@ -127,7 +119,7 @@ class $MODEL_NAME$Controller extends AppBaseController
      */
     public function edit($id)
     {
-        $$MODEL_NAME_CAMEL$ = $this->service->find($id);
+        $$MODEL_NAME_CAMEL$ = $this->repo->find($id);
         if(empty($$MODEL_NAME_CAMEL$))
         {
             Flash::error('$MODEL_NAME$ not found');
@@ -146,14 +138,14 @@ class $MODEL_NAME$Controller extends AppBaseController
      */
     public function update($id, Update$MODEL_NAME$Request $request)
     {
-        $$MODEL_NAME_CAMEL$ = $this->service->find($id);
+        $$MODEL_NAME_CAMEL$ = $this->repo->find($id);
         if(empty($$MODEL_NAME_CAMEL$))
         {
             Flash::error('$MODEL_NAME$ not found');
             return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
         }
 
-        $$MODEL_NAME_CAMEL$ = $this->service->update($request->all(), $id);
+        $$MODEL_NAME_CAMEL$ = $this->repo->update($request->all(), $id);
         Flash::success('$MODEL_NAME$ updated successfully.');
         return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
     }
@@ -167,7 +159,14 @@ class $MODEL_NAME$Controller extends AppBaseController
      */
     public function destroy($id)
     {
-        $this->service->delete($id);
+        $$MODEL_NAME_CAMEL$ = $this->repo->find($id);
+        if(empty($$MODEL_NAME_CAMEL$))
+        {
+            Flash::error('$MODEL_NAME$ not found');
+            return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
+        }
+
+        $this->repo->delete($id);
         Flash::success('$MODEL_NAME$ deleted successfully.');
         return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
     }
