@@ -36,6 +36,6 @@ class AppBaseController extends Controller
 
     public function sendResponse($result, $message)
     {
-        return Response::json($this->makeResponse($result, $message));
+        return Response::json($this->makeResponse($result, $message), 200, [], (JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
     }
 }
