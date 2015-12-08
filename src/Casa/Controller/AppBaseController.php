@@ -28,8 +28,7 @@ class AppBaseController extends Controller
 
     public function makeResponse($result, $message)
     {
-        return [
-            'data'    => $result,
+        return [$result,
             'message' => $message,
         ];
     }
