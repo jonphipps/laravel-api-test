@@ -28,7 +28,7 @@
         "php": ">=5.5.9",
         "illuminate/support": "5.1.*",
         "prettus/laravel-validation": "^1.1",
-        "doctrine/dbal": "2.5.*",
+        "doctrine/dbal": "^2.6",
         "mockery/mockery": "^0.9.4"
     },
     "autoload": {
